@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <my-header></my-header>
+    <b-menu></b-menu>
 
     <div class="container-fluid">
       <div class="row">
@@ -41,7 +41,8 @@
   import '../../static/swiper/animate.min.css'
   import Swiper from '../../static/swiper/swiper.min.js'
   import animate from '../../static/swiper/swiper.animate1.0.2.vue.js'
-  import header from '@/components/header'
+  import menu from '@/components/Menu'
+
   export default {
     name: 'index',
     data () {
@@ -103,8 +104,9 @@
 
       }
     },
+
     components:{
-      'my-header': header
+        'b-menu':menu
     }
   }
 </script>

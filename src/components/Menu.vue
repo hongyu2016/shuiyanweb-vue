@@ -1,6 +1,7 @@
 <template>
   <div class="menu-box" v-bind:class="menubg_style">
 
+
     <b-navbar class="container new-menu-bg" toggleable="md" type="dark" variant="" fixed="top" v-bind:style="nav_bg">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="#">
@@ -25,7 +26,7 @@
 </template>
 <script>
     export default {
-        name: 'header',
+        name: 'menus',
         data () {
             return {
               menubg_style:'',  //鼠标滚动一定距离改变背景颜色
