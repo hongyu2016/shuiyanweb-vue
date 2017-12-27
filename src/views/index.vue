@@ -113,20 +113,7 @@
   .main {
     width: 100%;
   }
-  .menu-box{
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1029;
-    background-color: rgba(0,0,0,0.2);
-    transition: all 0.3s 0.2s;
-  }
-  .deep-bg{
-    background-color: rgba(0,0,0,1);
-  }
+
   .swiper-container {
     width:100%;
     max-height: 900px;
@@ -161,13 +148,5 @@
     text-shadow:0 3px 5px #000 ;
   }
 
-  .new-menu-bg{
-    /*background-color:rgba(12,189,60,0.68)*/
-    background-color:rgba(0,0,0,0);
-
-  }
-  .menu-link>a.nav-link{
-    color: rgba(255, 255, 255, 0.9);
-  }
 
 </style>

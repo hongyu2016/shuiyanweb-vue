@@ -6,7 +6,6 @@
       <b-navbar-brand href="#">
         <img src="https://placekitten.com/g/30/30" alt="BV">
         logo
-
       </b-navbar-brand>
       <b-collapse is-nav v-model="showCollapse" id="nav_collapse" class="new-collapse">
 
@@ -73,5 +72,27 @@
     }
 </script>
 <style scoped>
+  .menu-box{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1029;
+    background-color: rgba(0,0,0,0.2);
+    transition: all 0.3s 0.2s;
+  }
+  .deep-bg{
+    background-color: rgba(0,0,0,1);
+  }
 
+  .new-menu-bg{
+    /*background-color:rgba(12,189,60,0.68)*/
+    background-color:rgba(0,0,0,0);
+
+  }
+  .menu-link>a.nav-link{
+    color: rgba(255, 255, 255, 0.9);
+  }
 </style>
