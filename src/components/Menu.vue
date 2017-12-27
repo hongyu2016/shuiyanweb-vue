@@ -35,7 +35,6 @@
             }
         },
         methods: {
-
           handleScroll () {
             //监听滚动
             let winScrollY=window.scrollY;
@@ -47,29 +46,28 @@
           }
         },
         mounted(){
-        this.$nextTick(function () {
-          // Code that will run only after the
-          // entire view has been rendered
-          //监听滚动
-          window.addEventListener('scroll', this.handleScroll);
+          this.$nextTick(function () {
+            // Code that will run only after the
+            // entire view has been rendered
+            //监听滚动
+            window.addEventListener('scroll', this.handleScroll);
 
-
-        })
-      },
-      watch:{
-        //检测值得变化 showCollapse对应data中的变量名
-        showCollapse:function (val,oldVal) {
-          //console.log('new: %s, old: %s', val, oldVal)
-          if(val==true){//此时 激活了下拉菜单 需要更改背景颜色
-            this.nav_bg={
-              backgroundColor:'rgb(0, 0, 0)'
+          })
+        },
+        watch:{
+          //检测值得变化 showCollapse对应data中的变量名
+          showCollapse:function (val,oldVal) {
+            //console.log('new: %s, old: %s', val, oldVal)
+            if(val==true){//此时 激活了下拉菜单 需要更改背景颜色
+              this.nav_bg={
+                backgroundColor:'rgb(0, 0, 0)'
+              }
+            }else{
+              this.nav_bg={}
             }
-          }else{
-            this.nav_bg={}
           }
-        }
 
-      }
+        }
     }
 </script>
 <style scoped>
