@@ -8,7 +8,7 @@
 
     <div class="block-main">
       <div class="container">
-        <div class="block-main-slide">
+        <div class="block-main-slide" id="abc">
           <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
             <h3 class="title">
               <i></i>
@@ -18,16 +18,10 @@
             <span class="des">水研重要的通知公告信息都在这</span>
           </div>
           <div class="block-main-list">
-            <b-container>
+            <b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
-                <b-col cols="7" md="8" class="notice-text text-left">今天开会，进行村委员的选举，大家务必到场</b-col>
-                <b-col cols="5" md="4" class="text-right">2017.12.12</b-col>
-              </b-row>
-            </b-container>
-            <b-container>
-              <b-row class="notice-ul">
-                <b-col cols="7" md="8" class="notice-text text-left">今天开会，进行村委员的选举，大家务必到场</b-col>
-                <b-col cols="5" md="4" class="text-right">2017.12.12</b-col>
+                <b-col cols="7" md="8" class="notice-text text-left" @click="showModal(list.id)" ref="btnShow">{{list.text}}</b-col>
+                <b-col cols="5" md="4" class="text-right">{{list.time}}</b-col>
               </b-row>
             </b-container>
           </div>
@@ -35,7 +29,10 @@
       </div>
     </div>
 
-
+    <!--通知公告弹出框-->
+    <b-modal id="modal1" centered title="通知公告" hide-footer lazy header-class="new-model">
+      <div class="d-block">{{fulltext}}</div>
+    </b-modal>
   </div>
 
 </template>
@@ -47,7 +44,8 @@
     name: 'index',
     data () {
       return {
-
+        gonggaolist:[],
+        fulltext:'公告内容'//公告全部内容
       }
     },
     mounted(){
@@ -58,18 +56,72 @@
         // Changing the defaults
         window.sr = scrollreveal({reset: true});
         // Customizing a reveal set
-        sr.reveal('.top-slide', {duration: 600});
+        sr.reveal('.top-slide', {
+        	duration: 600,
+          origin: 'top',
+          easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+          mobile: true,
+        });
+
+        this.getlist();
       })
     },
-    methods: {},
+    methods: {
+      getlist(){
+        this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) =>{
+          this.gonggaolist=[
+            {
+            	id:1,
+            	text:'今天开会，记得来哦',
+              time:'2017.12.12'
+            },
+            {
+              id:2,
+              text:'今天开会，记得来哦22',
+              time:'2017.12.12'
+            },
+            {
+              id:3,
+              text:'今天开会，记得来哦',
+              time:'2017.12.12'
+            },
+            {
+              id:4,
+              text:'今天开会，记得来哦',
+              time:'2017.12.12'
+            },
+            {
+              id:5,
+              text:'今天开会，记得来哦',
+              time:'2017.12.12'
+            }
+          ];
+          sr.reveal('.block-main-list', {
+            duration: 600,
+            origin: 'bottom',
+            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+            mobile: true,
+          });
+
+        });
+
+      },
+      showModal (id) {
+
+        console.log(id)
+        //拿id去获取内容
+
+        this.$root.$emit('bv::show::modal','modal1')
+      }
+    },
     components: {
       'b-menu': menu,
       'b-slide': slide,
     }
+
   }
 </script>
-<style scoped>
-
+<style>
   .main {
     width: 100%;
   }
@@ -110,5 +162,8 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+  }
+  .new-model{
+    padding: 10px 15px;
   }
 </style>
