@@ -17,6 +17,7 @@
           <b-nav-item href="#" class="menu-link">政务公开</b-nav-item>
           <b-nav-item href="#" class="menu-link">关于水研</b-nav-item>
           <b-nav-item href="#" class="menu-link">联系我们</b-nav-item>
+          <b-nav-item href="#" class="menu-link">后台登陆</b-nav-item>
         </b-navbar-nav>
 
       </b-collapse>
