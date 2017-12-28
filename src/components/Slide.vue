@@ -47,12 +47,6 @@
         },
 
         methods: {
-          onSlideStart (slide) {
-            //左滑动
-          },
-          onSlideEnd (slide) {
-            //又滑动
-          },
           get(){
             let that = this;
             this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) => {
