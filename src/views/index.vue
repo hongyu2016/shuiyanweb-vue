@@ -51,9 +51,79 @@
                 <b-col cols="12" md="10" class="text-left shuiyan-intro-right">
                   <p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
                   <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
-                  <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。<b-link href="">更多介绍</b-link></p>
+                  <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>
+                  <b-link href="">更多介绍</b-link>
                   <!--<h4>水研名字的由来</h4>
                   <p>有两个叫法，一叫“水碾”，是因为村里在流经的小河旁建造了一个水碾，据说是利用河水的冲力来碾米等加工粮食的，具体的时间已无从考究，所以后来就叫“水碾村”；但是登记上报到国家收录村庄的时候，用了简写，于是用了“水研”，也就是官方的名字是“水研”。</p>-->
+                </b-col>
+              </b-row>
+            </b-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--热点新闻-->
+    <div class="block-main news">
+      <div class="container">
+        <div class="block-main-slide">
+          <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
+            <h3 class="title">
+              <i></i>
+              最新新闻速递
+              <i></i>
+            </h3>
+            <span class="des">了解最新水研动态</span>
+          </div>
+          <div class="block-main-list news-main">
+            <b-container>
+              <b-row>
+                <b-col cols="12" md="4" class="news-list">
+                  <b-card title="这是标题"
+                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
+                          img-alt="Img"
+                          img-top
+                          class="img-list"
+                  >
+                    <div class="news-time">
+                      2017.12.12
+                    </div>
+                    <p class="card-text">
+                      这是内容--一篇文章的简介内容吧
+                    </p>
+                    <b-button href="#" variant="success">查看</b-button>
+                  </b-card>
+                </b-col>
+                <b-col cols="12" md="4" class="news-list">
+                  <b-card title="这是标题"
+                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
+                          img-alt="Img"
+                          img-top
+                          class="img-list"
+                  >
+                    <div class="news-time">
+                      2017.12.12
+                    </div>
+                    <p class="card-text">
+                      这是内容--一篇文章的简介内容吧
+                    </p>
+                    <b-button href="#" variant="success">查看</b-button>
+                  </b-card>
+                </b-col>
+                <b-col cols="12" md="4" class="news-list">
+                  <b-card title="这是标题"
+                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
+                          img-alt="Img"
+                          img-top
+                          class="img-list"
+                  >
+                    <div class="news-time">
+                      2017.12.12
+                    </div>
+                    <p class="card-text">
+                      这是内容--一篇文章的简介内容吧
+                    </p>
+                    <b-button href="#" variant="success">查看</b-button>
+                  </b-card>
                 </b-col>
               </b-row>
             </b-container>
@@ -135,7 +205,7 @@
               time:'2017.12.12'
             }
           ];
-          sr.reveal('.block-main-list', {
+          sr.reveal('.block-main-list,.news-list', {
             duration: 600,
             delay: 200,
             origin: 'bottom',
@@ -236,5 +306,17 @@
   }
   .shuiyan-intro-right p{
     margin-bottom: 0;
+  }
+
+  .img-list{
+    border-color: transparent;
+  }
+  .img-list .news-time{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #28a745;
+    padding: 3px 5px;
+    color: #fff;
   }
 </style>
