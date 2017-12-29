@@ -261,21 +261,20 @@
     justify-content: center;
   }
   .top-slide>h3>i{
-    background-color: #0bcc61;
+    background-color: #28a745;
     width: 40px;
     height: 5px;
     display: block;
     margin-top: 3px;
     margin-left: 10px;
     margin-right: 10px;
-
   }
 
   .top-slide>span{
     color: #8c8c8c;
   }
   .notice-main{
-    border:2px solid #0bcc61;
+    border:2px solid #28a745;
   }
   .notice-ul{
     padding: 5px 0px;
@@ -304,7 +303,7 @@
     width: 100px;
     height: 100px;
     margin: 10px auto;
-    background-color: #0bcc61;
+    background-color: #28a745;
     border-radius: 50%;
     position: relative;
     border: 3px solid #ceefd5;

@@ -3,6 +3,7 @@
     <div class="row">
 
       <div class="swiper-container swiper-container-horizontal" id="swiper-container">
+        <loading v-show="loading"></loading><!--loading-->
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for="item in slideList" :key="item.imgId">
             <img :src="host+item.slide_img"/>
@@ -33,6 +34,7 @@
   import '../../static/swiper/animate.min.css'
   import Swiper from '../../static/swiper/swiper.min.js'
   import animate from '../../static/swiper/swiper.animate1.0.2.vue.js'
+  import loading from '@/components/loading'
     export default {
         name: 'slide',
         data () {
@@ -40,19 +42,21 @@
               host:'http://127.0.0.1:5000',
               slide: 0,
               slideList: [],  //轮播图数据
+              loading: false
             }
         },
         created () {
           this.get()
         },
-
         methods: {
           get(){
-            let that = this;
+            this.loading = true;
+            const that = this;
             this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) => {
               let data=res.data;
               if (data.success == true) {
                 that.slideList=data.data.datalist;
+                that.loading = false;
                 that.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
                   let mySwiper = new Swiper('#swiper-container',{
                     //autoplay : true,
@@ -86,6 +90,9 @@
             })
 
           }
+        },
+        components: {
+          'loading':loading
         }
     }
 </script>
@@ -93,6 +100,7 @@
   .swiper-container {
     width:100%;
     max-height: 900px;
+    min-height: 200px;
   }
   .swiper-wrapper{
     display: flex;
