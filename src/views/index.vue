@@ -8,7 +8,7 @@
 
     <div class="block-main">
       <div class="container">
-        <div class="block-main-slide" id="abc">
+        <div class="block-main-slide">
           <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
             <h3 class="title">
               <i></i>
@@ -20,8 +20,8 @@
           <div class="block-main-list">
             <b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
-                <b-col cols="7" md="8" class="notice-text text-left" @click="showModal(list.id)" ref="btnShow">{{list.text}}</b-col>
-                <b-col cols="5" md="4" class="text-right">{{list.time}}</b-col>
+                <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.id)" ref="btnShow">{{list.text}}</b-col>
+                <b-col cols="4" md="4" class="text-right notice-time">{{list.time}}</b-col>
               </b-row>
             </b-container>
           </div>
@@ -59,10 +59,16 @@
         sr.reveal('.top-slide', {
         	duration: 600,
           origin: 'top',
-          easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+          easing: 'ease-in',
+          distance: '200px',
+          duration: 500,
+          delay: 100,
+          rotate: { x: 0, y: 0, z: 0 },
+          opacity: 0,
+          scale: 0.1,
           mobile: true,
+          viewOffset: { top: 100, right: 0, bottom: 0, left: 100 }
         });
-
         this.getlist();
       })
     },
@@ -77,7 +83,7 @@
             },
             {
               id:2,
-              text:'今天开会，记得来哦22',
+              text:'今天开会，记得来睡觉',
               time:'2017.12.12'
             },
             {
@@ -98,16 +104,16 @@
           ];
           sr.reveal('.block-main-list', {
             duration: 600,
+            delay: 200,
             origin: 'bottom',
+            distance: '200px',
             easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
             mobile: true,
           });
-
         });
 
       },
       showModal (id) {
-
         console.log(id)
         //拿id去获取内容
 
@@ -162,6 +168,14 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+  }
+  @media (max-width: 500px){
+    .notice-text{
+      padding-right: 1px;
+    }
+    .notice-time{
+      padding-left: 1px;
+    }
   }
   .new-model{
     padding: 10px 15px;
