@@ -5,7 +5,7 @@
 
     <!--轮播图-->
     <b-slide></b-slide>
-
+    <!--公告-->
     <div class="block-main">
       <div class="container">
         <div class="block-main-slide">
@@ -17,11 +17,44 @@
             </h3>
             <span class="des">水研重要的通知公告信息都在这</span>
           </div>
-          <div class="block-main-list">
+          <div class="block-main-list notice-main">
             <b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
                 <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.id)" ref="btnShow">{{list.text}}</b-col>
                 <b-col cols="4" md="4" class="text-right notice-time">{{list.time}}</b-col>
+              </b-row>
+            </b-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--水研简介-->
+    <div class="block-main introduce">
+      <div class="container">
+        <div class="block-main-slide">
+          <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
+            <h3 class="title">
+              <i></i>
+              水研简介
+              <i></i>
+            </h3>
+            <span class="des">了解水研的过去与未来</span>
+          </div>
+          <div class="block-main-list introduce-main">
+            <b-container>
+              <b-row>
+                <b-col cols="12" md="2">
+                  <div class="shuiyan-intro-left">
+                    <h3>水研</h3>
+                  </div>
+                </b-col>
+                <b-col cols="12" md="10" class="text-left shuiyan-intro-right">
+                  <p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
+                  <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
+                  <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。<b-link href="">更多介绍</b-link></p>
+                  <!--<h4>水研名字的由来</h4>
+                  <p>有两个叫法，一叫“水碾”，是因为村里在流经的小河旁建造了一个水碾，据说是利用河水的冲力来碾米等加工粮食的，具体的时间已无从考究，所以后来就叫“水碾村”；但是登记上报到国家收录村庄的时候，用了简写，于是用了“水研”，也就是官方的名字是“水研”。</p>-->
+                </b-col>
               </b-row>
             </b-container>
           </div>
@@ -67,7 +100,7 @@
           opacity: 0,
           scale: 0.1,
           mobile: true,
-          viewOffset: { top: 100, right: 0, bottom: 0, left: 100 }
+          viewOffset: { top: 0, right: 0, bottom: 0, left: 0 }
         });
         this.getlist();
       })
@@ -157,7 +190,7 @@
   .top-slide>span{
     color: #8c8c8c;
   }
-  .block-main-list{
+  .notice-main{
     border:2px solid #0bcc61;
   }
   .notice-ul{
@@ -179,5 +212,29 @@
   }
   .new-model{
     padding: 10px 15px;
+  }
+  .introduce{
+    background-color: #e8eae6;
+  }
+  .shuiyan-intro-left{
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    background-color: #0bcc61;
+    border-radius: 50%;
+    position: relative;
+    border: 3px solid #ceefd5;
+    box-shadow: 0 0 5px 3px #c7c7c7;
+  }
+  .shuiyan-intro-left>h3{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    color: #fff;
+  }
+  .shuiyan-intro-right p{
+    margin-bottom: 0;
   }
 </style>
