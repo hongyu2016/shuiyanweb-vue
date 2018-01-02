@@ -11,13 +11,13 @@
       <b-collapse is-nav v-model="showCollapse" id="nav_collapse" class="new-collapse">
 
         <b-navbar-nav>
-          <b-nav-item href="#" class="menu-link">主页</b-nav-item>
+          <b-nav-item href="#" class="menu-link" active>主页</b-nav-item>
           <b-nav-item href="#" class="menu-link">水研新闻</b-nav-item>
           <b-nav-item href="#" class="menu-link">水研风采</b-nav-item>
           <b-nav-item href="#" class="menu-link">政务公开</b-nav-item>
           <b-nav-item href="#" class="menu-link">关于水研</b-nav-item>
           <b-nav-item href="#" class="menu-link">联系我们</b-nav-item>
-          <b-nav-item href="#" class="menu-link">后台登陆</b-nav-item>
+          <b-nav-item href="https://shuiyanweb.herokuapp.com" class="menu-link" target="_blank">后台登陆</b-nav-item>
         </b-navbar-nav>
 
       </b-collapse>
@@ -94,5 +94,8 @@
   }
   .menu-link>a.nav-link{
     color: rgba(255, 255, 255, 0.9);
+  }
+  .menu-link>a.nav-link.active{
+    border-bottom: 2px solid #28a745;
   }
 </style>

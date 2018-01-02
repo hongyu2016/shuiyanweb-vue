@@ -143,7 +143,7 @@
             </h3>
             <span class="des">美丽水研</span>
           </div>
-          <div class="block-main-list news-main">
+          <div class="block-main-list img-main">
             <b-row>
               <b-col cols="6" md="3" class="index-img-list no-padding">
                 <a href="#">
@@ -270,7 +270,7 @@
         // entire view has been rendered
 
         // Changing the defaults
-        window.sr = scrollreveal({reset: true});
+        window.sr = scrollreveal({reset: false});
         // Customizing a reveal set
         sr.reveal('.top-slide', {
         	duration: 600,
@@ -318,7 +318,7 @@
               time:'2017.12.12'
             }
           ];
-          sr.reveal('.block-main-list,.news-list', {
+          sr.reveal('.block-main-list,.news-list,.index-img-list', {
             duration: 600,
             delay: 200,
             origin: 'bottom',
@@ -451,6 +451,13 @@
   .index-img-list .index-img-column{
     position: relative;
     width: 100%;
+    overflow: hidden;
+  }
+  .index-img-list .index-img-column>img{
+    transition: all 0.5s ease-in-out 0.1s;
+  }
+  .index-img-list:hover .index-img-column>img{
+    transform: scale(1.2);
   }
   .index-img-list .bottom-info{
     width: 100%;
@@ -467,5 +474,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .index-img-list:hover .bottom-info{
+    height: 50px;
   }
 </style>
