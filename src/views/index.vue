@@ -69,7 +69,7 @@
           <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
             <h3 class="title">
               <i></i>
-              最新新闻速递
+              新闻速递
               <i></i>
             </h3>
             <span class="des">了解最新水研动态</span>
@@ -127,6 +127,105 @@
                 </b-col>
               </b-row>
             </b-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--水研风采图集-->
+    <div class="block-main news">
+      <div class="container-fluid">
+        <div class="block-main-slide">
+          <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
+            <h3 class="title">
+              <i></i>
+              水研风采
+              <i></i>
+            </h3>
+            <span class="des">美丽水研</span>
+          </div>
+          <div class="block-main-list news-main">
+            <b-row>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+              <b-col cols="6" md="3" class="index-img-list no-padding">
+                <a href="#">
+                  <div class="index-img-column">
+                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg" fluid alt="水研图片1" />
+                    <div class="bottom-info">
+                      <span>这是水研图片1</span>
+                    </div>
+                  </div>
+                </a>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </div>
@@ -347,5 +446,26 @@
   .friend-link .friend-link-a{
     color: aliceblue;
     padding: 3px;
+  }
+  /*水研图集*/
+  .index-img-list .index-img-column{
+    position: relative;
+    width: 100%;
+  }
+  .index-img-list .bottom-info{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0 5px;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>

@@ -23,11 +23,14 @@
     margin: 0;
     padding: 0;
   }
-#app {
-  font-family: '微软雅黑', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  #app {
+    font-family: '微软雅黑', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  .no-padding{
+    padding: 0;
+  }
 </style>
