@@ -39,7 +39,7 @@
         name: 'slide',
         data () {
             return {
-              host:'http://127.0.0.1:5000',
+              host:'https:shuiyanweb.herokuapp.com',
               slide: 0,
               slideList: [],  //轮播图数据
               loading: false
@@ -52,7 +52,7 @@
           get(){
             this.loading = true;
             const that = this;
-            this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) => {
+            this.$http.get(`${this.hostUrl}/api/index/slide`).then((res) => {
               let data=res.data;
               if (data.success == true) {
                 that.slideList=data.data.datalist;

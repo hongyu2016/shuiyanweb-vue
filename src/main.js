@@ -12,12 +12,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueLazyLoad from 'vue-lazyload'
 import VueTouch from 'vue-touch'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.prototype.$http=axios;
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
-Vue.use(VueLazyLoad);
-Vue.use(VueTouch, { name: 'v-touch' });
+/*Vue.use(VueLazyLoad);
+Vue.use(VueTouch, { name: 'v-touch' });*/
+const host_url='https://shuiyanweb.herokuapp.com';
+Vue.prototype.hostUrl=host_url;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

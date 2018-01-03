@@ -230,7 +230,7 @@
     },
     methods: {
       getlist(){
-        this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) =>{
+        this.$http.get(`${this.hostUrl}/api/index/slide`).then((res) =>{
           this.gonggaolist=[ //公告
             {
             	id:1,
