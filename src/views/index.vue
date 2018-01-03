@@ -145,86 +145,17 @@
           </div>
           <div class="block-main-list img-main">
             <b-row>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
+              <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.id">
+                <a href="javascript:;">
                   <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg" fluid alt="水研图片1" />
+                    <b-img :src="list.imgSrc" fluid :alt="list.title" @click="clickImg($event)"/>
                     <div class="bottom-info">
-                      <span>这是水研图片1</span>
+                      <span>{{list.title}}</span>
                     </div>
                   </div>
                 </a>
               </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/populardestinaion1-wide.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
-              <b-col cols="6" md="3" class="index-img-list no-padding">
-                <a href="#">
-                  <div class="index-img-column">
-                    <b-img src="http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg" fluid alt="水研图片1" />
-                    <div class="bottom-info">
-                      <span>这是水研图片1</span>
-                    </div>
-                  </div>
-                </a>
-              </b-col>
+
             </b-row>
           </div>
         </div>
@@ -249,19 +180,25 @@
     <b-modal id="modal1" centered title="通知公告" hide-footer lazy header-class="new-model">
       <div class="d-block">{{fulltext}}</div>
     </b-modal>
+    <!-- 放大图片 -->
+    <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
   </div>
 
 </template>
 <script>
-  import menu from '@/components/Menu'
-  import slide from '@/components/Slide'
-  import scrollreveal from 'scrollreveal'
+  import menu from '@/components/Menu' //菜单
+  import slide from '@/components/Slide' //轮播图
+  import scrollreveal from 'scrollreveal'  //滚动动画
+  import bigImg from '@/components/MagnifyImg' //图片放大
   export default {
     name: 'index',
     data () {
       return {
         gonggaolist:[],
-        fulltext:'公告内容'//公告全部内容
+        fulltext:'公告内容',//公告全部内容
+        imgList:[],//水研图集
+        showImg:false,//放大
+        imgSrc: ''//放大
       }
     },
     mounted(){
@@ -291,7 +228,7 @@
     methods: {
       getlist(){
         this.$http.get('http://127.0.0.1:5000/api/index/slide').then((res) =>{
-          this.gonggaolist=[
+          this.gonggaolist=[ //公告
             {
             	id:1,
             	text:'今天开会，记得来哦',
@@ -318,6 +255,48 @@
               time:'2017.12.12'
             }
           ];
+          this.imgList=[
+            {
+            	id:1,
+              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
+              title:'这是水研图片1'
+            },
+            {
+              id:2,
+              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
+              title:'这是水研图片2'
+            },
+            {
+              id:3,
+              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
+              title:'这是水研图片3'
+            },
+            {
+              id:4,
+              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
+              title:'这是水研图片4'
+            },
+            {
+              id:5,
+              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
+              title:'这是水研图片5'
+            },
+            {
+              id:6,
+              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
+              title:'这是水研图片6'
+            },
+            {
+              id:7,
+              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
+              title:'这是水研图片7'
+            },
+            {
+              id:8,
+              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
+              title:'这是水研图片8'
+            }
+          ];
           sr.reveal('.block-main-list,.news-list,.index-img-list', {
             duration: 600,
             delay: 200,
@@ -334,11 +313,20 @@
         //拿id去获取内容
 
         this.$root.$emit('bv::show::modal','modal1')
-      }
+      },
+      clickImg(e) {
+        this.showImg = true;
+        // 获取当前图片地址
+        this.imgSrc = e.currentTarget.src;
+      },
+      viewImg(){
+        this.showImg = false;
+      },
     },
     components: {
       'b-menu': menu,
       'b-slide': slide,
+      'big-img':bigImg
     }
 
   }
