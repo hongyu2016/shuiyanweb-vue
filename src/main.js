@@ -9,11 +9,15 @@ import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueLazyLoad from 'vue-lazyload'
+import VueTouch from 'vue-touch'
 
 Vue.config.productionTip = false
 Vue.prototype.$http=axios;
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
+Vue.use(VueLazyLoad);
+Vue.use(VueTouch, { name: 'v-touch' });
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

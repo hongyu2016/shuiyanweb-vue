@@ -149,6 +149,7 @@
                 <a href="javascript:;">
                   <div class="index-img-column">
                     <b-img :src="list.imgSrc" fluid :alt="list.title" @click="clickImg($event)"/>
+
                     <div class="bottom-info">
                       <span>{{list.title}}</span>
                     </div>
@@ -182,6 +183,7 @@
     </b-modal>
     <!-- 放大图片 -->
     <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
+
   </div>
 
 </template>
@@ -190,6 +192,7 @@
   import slide from '@/components/Slide' //轮播图
   import scrollreveal from 'scrollreveal'  //滚动动画
   import bigImg from '@/components/MagnifyImg' //图片放大
+
   export default {
     name: 'index',
     data () {
@@ -326,7 +329,7 @@
     components: {
       'b-menu': menu,
       'b-slide': slide,
-      'big-img':bigImg
+      'big-img':bigImg,
     }
 
   }
