@@ -39,7 +39,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'),resolve('static/swiper/swiper.animate1.0.2.vue.js')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
