@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <!--菜单-->
-    <b-menu></b-menu>
 
     <!--轮播图-->
     <b-slide></b-slide>
@@ -188,7 +186,7 @@
 
 </template>
 <script>
-  import menu from '@/components/Menu' //菜单
+
   import slide from '@/components/Slide' //轮播图
   import scrollreveal from 'scrollreveal'  //滚动动画
   import bigImg from '@/components/MagnifyImg' //图片放大
@@ -327,7 +325,7 @@
       },
     },
     components: {
-      'b-menu': menu,
+      //'b-menu': menu,
       'b-slide': slide,
       'big-img':bigImg,
     }

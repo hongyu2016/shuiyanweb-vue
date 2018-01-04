@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/logo.png">-->
+    <!--<img src="./assets/page_head.jpg"/>-->
+    <!--菜单-->
+    <b-menu></b-menu>
     <router-view/>
   </div>
 </template>
 
 <script>
+  import menu from './components/Menu.vue' //菜单
   export default {
-    name: 'app'
+    name: 'app',
+    components:{'b-menu':menu}
   }
 </script>
 

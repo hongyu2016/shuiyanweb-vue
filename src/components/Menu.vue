@@ -12,7 +12,9 @@
 
         <b-navbar-nav>
           <b-nav-item href="#" class="menu-link" active>主页</b-nav-item>
-          <b-nav-item href="#" class="menu-link">水研新闻</b-nav-item>
+
+
+          <!--<b-nav-item href="#" class="menu-link">水研新闻</b-nav-item>-->
           <b-nav-item href="#" class="menu-link">水研风采</b-nav-item>
           <b-nav-item href="#" class="menu-link">政务公开</b-nav-item>
           <b-nav-item href="#" class="menu-link">关于水研</b-nav-item>
@@ -22,7 +24,7 @@
 
       </b-collapse>
     </b-navbar>
-
+    <router-link :to="{name:'news'}">水研新闻</router-link>
   </div>
 </template>
 <script>
@@ -91,6 +93,9 @@
     /*background-color:rgba(12,189,60,0.68)*/
     background-color:rgba(0,0,0,0);
 
+  }
+  .menu-link{
+    margin: 0 5px;
   }
   .menu-link>a.nav-link{
     color: rgba(255, 255, 255, 0.9);
