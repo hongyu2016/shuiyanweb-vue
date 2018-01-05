@@ -4,14 +4,16 @@
     <!--菜单-->
     <b-menu></b-menu>
     <router-view/>
+    <b-foot></b-foot>
   </div>
 </template>
 
 <script>
   import menu from './components/Menu.vue' //菜单
+  import foot from './components/Foot.vue'  //底部信息
   export default {
     name: 'app',
-    components:{'b-menu':menu}
+    components:{'b-menu':menu,'b-foot':foot}
   }
 </script>
 
