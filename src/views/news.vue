@@ -144,6 +144,7 @@
   }
   .view>a{
     color:#f58018;
+    padding: 5px;
   }
   .view>a>i{
     margin-left: 5px;
