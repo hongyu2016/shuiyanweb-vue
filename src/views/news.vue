@@ -77,6 +77,8 @@
           </a>
         </b-col>
       </b-row>
+      <!--<b-pagination-nav align="center" :number-of-pages="10" base-url="#" v-model="currentPage" />-->
+      <b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage" use-router class="pagination-box"/>
 
     </b-container>
   </div>
@@ -85,9 +87,29 @@
 	export default {
 		name: 'news',
 		data () {
-			return {}
+			return {
+        currentPage:1
+      }
 		},
-		methods: {}
+    mounted(){
+      this.currentPage=Number(this.$route.params.page);  //初始化时获取地址栏的页码
+
+    },
+    watch:{
+      //路由切换时进行判断--获取数据的操作
+      '$route'(to,from){
+        if(to.name=='news'){
+          this.currentPage=Number(this.$route.params.page);
+          //this.get();
+          console.log(this.$route.params.page)
+        }
+      }
+    },
+		methods: {
+      linkGen (pageNum) {
+        return '/news/page/'+pageNum
+      }
+    }
 	}
 </script>
 <style scoped>
@@ -202,4 +224,7 @@
     }
   }
 
+  .pagination-box{
+    margin-bottom: 40px;
+  }
 </style>

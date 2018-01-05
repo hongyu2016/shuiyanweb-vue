@@ -14,7 +14,7 @@
           <router-link tag="li" to="/" class="nav-item menu-link" exact>
             <a href="" class="nav-link">主页</a>
           </router-link>
-          <router-link tag="li" to="/news" class="nav-item menu-link" exact>
+          <router-link tag="li" :to="{name:'news',params:{page:1}}" class="nav-item menu-link" exact>
             <a href="" class="nav-link">水研新闻</a>
           </router-link>
 
