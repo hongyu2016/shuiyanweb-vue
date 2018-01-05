@@ -17,5 +17,6 @@ export default new Router({
       name: 'news',
       component: news
     }
-  ]
+  ],
+  linkActiveClass:'menu-active'
 })
