@@ -14,9 +14,10 @@
           <h1 class="text-left">这是一条标题</h1>
           <p class="text-left des">这是一个内容描述，只是一部分，不是全部</p>
           <div class="news-focus-bottom">
-            <div class="time">2018-1-5</div>
+
+            <div class="time"><i class="fa fa-clock-o" aria-hidden="true"></i>2018-1-5</div>
             <div class="view">
-              <a href="#">查看</a>
+              <a href="#">查看<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -24,61 +25,57 @@
       <!--新闻列表-->
       <b-row class="news-list">
         <b-col cols="6" md="3">
-          <div  class="news-list-item text-left">
-            <div class="img">
-              <img src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg"/>
+          <a href="">
+            <div  class="news-list-item text-left">
+              <div class="img">
+                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
+              </div>
+              <div class="news-list-bottom">
+                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
+                <p class="news-time">2018-1-5</p>
+              </div>
             </div>
-            <div class="news-list-bottom">
-              <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-              <p class="news-time">2018-1-5</p>
-            </div>
-          </div>
+          </a>
         </b-col>
         <b-col cols="6" md="3">
-          <div  class="news-list-item text-left">
-            <div class="img">
-              <img src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg"/>
+          <a href="">
+            <div  class="news-list-item text-left">
+              <div class="img">
+                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
+              </div>
+              <div class="news-list-bottom">
+                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
+                <p class="news-time">2018-1-5</p>
+              </div>
             </div>
-            <div class="news-list-bottom">
-              <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-              <p class="news-time">2018-1-5</p>
-            </div>
-          </div>
+          </a>
         </b-col>
         <b-col cols="6" md="3">
-          <div  class="news-list-item text-left">
-            <div class="img">
-              <img src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg"/>
+          <a href="">
+            <div  class="news-list-item text-left">
+              <div class="img">
+                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
+              </div>
+              <div class="news-list-bottom">
+                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
+                <p class="news-time">2018-1-5</p>
+              </div>
             </div>
-            <div class="news-list-bottom">
-              <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-              <p class="news-time">2018-1-5</p>
-            </div>
-          </div>
+          </a>
         </b-col>
         <b-col cols="6" md="3">
-          <div  class="news-list-item text-left">
-            <div class="img">
-              <img src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg"/>
+          <a href="">
+            <div  class="news-list-item text-left">
+              <div class="img">
+                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
+              </div>
+              <div class="news-list-bottom">
+                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
+                <p class="news-time">2018-1-5</p>
+              </div>
             </div>
-            <div class="news-list-bottom">
-              <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-              <p class="news-time">2018-1-5</p>
-            </div>
-          </div>
+          </a>
         </b-col>
-        <b-col cols="6" md="3">
-          <div  class="news-list-item text-left">
-            <div class="img">
-              <img src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg"/>
-            </div>
-            <div class="news-list-bottom">
-              <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-              <p class="news-time">2018-1-5</p>
-            </div>
-          </div>
-        </b-col>
-
       </b-row>
 
     </b-container>
@@ -138,12 +135,41 @@
     display: flex;
     justify-content: space-between;
   }
+  .news-focus-bottom .time{
+    color:  #7d7d7d
+  }
+  .news-focus-bottom .time i{
+    color: #f58018;
+    margin-right: 5px;
+  }
+  .view>a{
+    color:#f58018;
+  }
+  .view>a>i{
+    margin-left: 5px;
+  }
 
+  .news-list a{
+    display: block;
+    color: inherit;
+  }
+  .news-list a:hover{
+    text-decoration: none;
+  }
   .news-list{
     margin-top: 40px;
+    margin-bottom: 40px;
   }
   .news-list-item{
     border: 1px solid #f7f7f7;
+    transition: all 0.2s ease-out 0s;
+    position: relative;
+    top: 0;
+  }
+  .news-list-item:hover{
+    top: -5px;
+    box-shadow: 2px 2px 10px 1px #adabab;
+
   }
   .news-list-bottom{
     padding: 0 1rem;
