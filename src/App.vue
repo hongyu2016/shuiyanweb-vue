@@ -39,4 +39,12 @@
   .no-padding{
     padding: 0;
   }
+  .page-active:not([disabled]):not(.disabled).active{
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow:none;
+  }
+  .page-link{
+    color: inherit;
+  }
 </style>
