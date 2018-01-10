@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2018/1/10.
+ * 中央事务总线 用于同级组件间的通信
  */
 import Vue from 'Vue'
-export  default new Vue;
+export default new Vue;

@@ -77,13 +77,8 @@
           </a>
         </b-col>
       </b-row>
-
-
-      <!--<b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage"  class="pagination-box" hide-goto-end-buttons prev-text="上一页" next-text="下一页" active-class="page-active"/>-->
-
-      <b-pagination-nav :number-of-pages="10" base-url="#" v-model="currentPage" :link-gen="linkGen" />
-
-
+      
+      <b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage"  class="pagination-box" hide-goto-end-buttons prev-text="上一页" next-text="下一页" active-class="page-active"/>
 
     </b-container>
   </div>

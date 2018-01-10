@@ -13,7 +13,7 @@
           <router-link tag="li" to="/" class="nav-item menu-link" exact>
             <a href="" class="nav-link">主页</a>
           </router-link>
-          <router-link tag="li" :to="{name:'news'}" class="nav-item menu-link" :class="{'menu-active':active}" exact>
+          <router-link tag="li" :to="{name:'news',params:{page:1}}" class="nav-item menu-link" :class="{'menu-active':active}" exact>
             <a href="" class="nav-link">水研新闻</a>
           </router-link>
 
@@ -75,6 +75,7 @@
             }else{
               this.active=false;
             }
+
             //监听滚动
             window.addEventListener('scroll', this.handleScroll);
 

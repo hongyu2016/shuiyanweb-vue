@@ -13,15 +13,19 @@ export default new Router({
       component: index
     },
     {
-      path: '/news',
+      path: '/news/page/:page',
       name: 'news',
       component: news,
-      children:[
+      /*children:[
         {
           path: '/news/page/:page',
-          component: newsList
+          component: news
         }
-      ]
+      ]*/
+    },
+    {
+      path:'*',
+      redirect:'/',
     }
   ],
   linkActiveClass:'menu-active'
