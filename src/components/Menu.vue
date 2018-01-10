@@ -1,7 +1,6 @@
 <template>
   <div class="menu-box" v-bind:class="menubg_style">
 
-
     <b-navbar class="container new-menu-bg" toggleable="md" type="dark" variant="" fixed="top" v-bind:style="nav_bg">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="#">
@@ -14,9 +13,11 @@
           <router-link tag="li" to="/" class="nav-item menu-link" exact>
             <a href="" class="nav-link">主页</a>
           </router-link>
-          <router-link tag="li" :to="{name:'news',params:{page:1}}" class="nav-item menu-link" exact>
+          <router-link tag="li" :to="{name:'news'}" class="nav-item menu-link" :class="{'menu-active':active}" exact>
             <a href="" class="nav-link">水研新闻</a>
           </router-link>
+
+
 
           <!--<router-link tag="li" to="" class="nav-item menu-link">
             <a href="" class="nav-link">水研风采</a>
@@ -36,13 +37,16 @@
   </div>
 </template>
 <script>
+    import eventBus from '../assets/eventBus';  //同级组件通信 中央事务总线
     export default {
         name: 'menus',
         data () {
             return {
               menubg_style:'',  //鼠标滚动一定距离改变背景颜色
               nav_bg:{},//菜单栏的背景色
-              showCollapse:false
+              showCollapse:false,
+              active:false,
+              msg:'默认值'  //同级组件通信 中央事务总线
             }
         },
         methods: {
@@ -56,10 +60,21 @@
             }
           }
         },
+
         mounted(){
           this.$nextTick(function () {
             // Code that will run only after the
             // entire view has been rendered
+            //同级组件通信 中央事务总线
+            eventBus.$on('userC',(msg)=>{
+            	this.msg=msg;
+            });
+            //如果当前路由是新闻，则选中新闻菜单
+            if(this.$route.matched[0].name=='news'){
+              this.active=true;
+            }else{
+              this.active=false;
+            }
             //监听滚动
             window.addEventListener('scroll', this.handleScroll);
 
@@ -68,7 +83,6 @@
         watch:{
           //检测值得变化 showCollapse对应data中的变量名
           showCollapse:function (val,oldVal) {
-            //console.log('new: %s, old: %s', val, oldVal)
             if(val==true){//此时 激活了下拉菜单 需要更改背景颜色
               this.nav_bg={
                 backgroundColor:'rgb(0, 0, 0)'
@@ -76,8 +90,14 @@
             }else{
               this.nav_bg={}
             }
+          },
+          '$route'(to,from){
+          	if(to.matched[0].name=='news'){
+          		this.active=true;
+            }else{
+              this.active=false;
+            }
           }
-
         }
     }
 </script>

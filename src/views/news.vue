@@ -77,12 +77,19 @@
           </a>
         </b-col>
       </b-row>
-      <b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage" use-router class="pagination-box" limit="7" hide-goto-end-buttons prev-text="上一页" next-text="下一页" active-class="page-active"/>
+
+
+      <!--<b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage"  class="pagination-box" hide-goto-end-buttons prev-text="上一页" next-text="下一页" active-class="page-active"/>-->
+
+      <b-pagination-nav :number-of-pages="10" base-url="#" v-model="currentPage" :link-gen="linkGen" />
+
+
 
     </b-container>
   </div>
 </template>
 <script>
+  import eventBus from '../assets/eventBus'; //同级组件通信 中央事务总线
 	export default {
 		name: 'news',
 		data () {
@@ -91,23 +98,25 @@
       }
 		},
     mounted(){
-      this.currentPage=Number(this.$route.params.page);  //初始化时获取地址栏的页码
+
+      this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;  //初始化时获取地址栏的页码
 
     },
     watch:{
       //路由切换时进行判断--获取数据的操作
       '$route'(to,from){
+      	//console.log(to)
         if(to.name=='news'){
-          this.currentPage=Number(this.$route.params.page);
-          //this.get();
-          console.log(this.$route.params.page)
+          this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;
+          //请求 服务器 拿数据
         }
       }
     },
 		methods: {
       linkGen (pageNum) {
-        return '/news/page/'+pageNum
-      }
+        eventBus.$emit('userC','测试下//同级组件通信 中央事务总线'); //同级组件通信 中央事务总线
+        return '#/news/page/'+pageNum
+        }
     }
 	}
 </script>
