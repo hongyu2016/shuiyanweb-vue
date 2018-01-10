@@ -60,13 +60,13 @@
       </div>
       <!--地图-->
       <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
-      <h3 class="title">
-        <i></i>
-        地理位置
-        <i></i>
-      </h3>
-      <span class="des">有了地图，不怕找不到</span>
-  </div>
+          <h3 class="title">
+            <i></i>
+            地理位置
+            <i></i>
+          </h3>
+          <span class="des">有了地图，不怕找不到</span>
+      </div>
       <div class="map-box">
         <baidu-map class="bm-view" :center="{lng: 109.742132, lat: 21.662711}" :zoom="15" ak="FE4d26f8650a4365d9d7e0160da5dfc8">
           <bm-navigation anchor="BMAP_ANCHOR_TOP_LEFT"></bm-navigation>
