@@ -4,6 +4,14 @@
       <img src="../assets/page_head.jpg" class="hidden-sm"/>
       <img src="../assets/page_head_small.jpg" class="hidden-lg"/>
     </header>
+    <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
+      <h3 class="title">
+        <i></i>
+        水研新闻
+        <i></i>
+      </h3>
+      <span class="des">了解水研动态</span>
+    </div>
     <b-container>
       <!--焦点一条新闻-->
       <div class="news-focus-box">
@@ -116,26 +124,11 @@
 	}
 </script>
 <style scoped>
-  img{width: 100%}
-  .head{
-    width: 100%;
-    overflow: hidden;
-  }
-  .head img{
-    max-width: 100%;
-  }
-  .hidden-sm{
-    display: block;
-  }
-  .hidden-lg{
-    display: none;
-  }
 
   .news-focus-box{
     display: flex;
     border: 1px solid #f7f7f7;
     box-shadow: 2px 2px 10px 1px #adabab;
-    margin-top: 40px;
   }
   .news-focus-img,.news-focus-info{
     flex: 0 0 50%;

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/views/index'
 import news from '@/views/news'
-import newsList from '@/components/NewsList'
+import contactus from '@/views/contactus'
 Vue.use(Router)
 
 export default new Router({
@@ -22,6 +22,11 @@ export default new Router({
           component: news
         }
       ]*/
+    },
+    {
+      path:'/contactus',
+      name:'contactus',
+      component:contactus
     },
     {
       path:'*',

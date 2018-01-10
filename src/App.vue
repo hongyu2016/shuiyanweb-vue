@@ -39,7 +39,7 @@
   .no-padding{
     padding: 0;
   }
-
+  /*修改默认分页的样式*/
   .page-item.active .page-link{
     background-color: #28a745;
     border-color: #28a745;
@@ -61,5 +61,42 @@
 
   .page-link{
     color: inherit;
+  }
+  /*每个小模块的标题*/
+  .top-slide{
+    margin-bottom: 20px;
+  }
+  .top-slide>h3{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .top-slide>h3>i{
+    background-color: #28a745;
+    width: 40px;
+    height: 5px;
+    display: block;
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .top-slide>span{
+    color: #8c8c8c;
+  }
+  /*其他页面的顶部图片*/
+  .head{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .head img{
+    max-width: 100%;
+  }
+  .hidden-sm{
+    display: block;
+  }
+  .hidden-lg{
+    display: none;
   }
 </style>

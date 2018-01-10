@@ -327,28 +327,7 @@
   .block-main{
     padding: 30px 0px;
   }
-  .top-slide{
-    margin-bottom: 20px;
-  }
-  .top-slide>h3{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .top-slide>h3>i{
-    background-color: #28a745;
-    width: 40px;
-    height: 5px;
-    display: block;
-    margin-top: 3px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 
-  .top-slide>span{
-    color: #8c8c8c;
-  }
   .notice-main{
     border:2px solid #28a745;
   }
