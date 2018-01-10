@@ -39,11 +39,26 @@
   .no-padding{
     padding: 0;
   }
-  .page-active:not([disabled]):not(.disabled).active{
+
+  .page-item.active .page-link{
     background-color: #28a745;
     border-color: #28a745;
     box-shadow:none;
   }
+
+  .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle,.btn-primary:not([disabled]):not(.disabled):focus{
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow:none;
+    cursor: default;
+  }
+
+  /*.page-active:not([disabled]):not(.disabled).active{
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow:none;
+  }*/
+
   .page-link{
     color: inherit;
   }
