@@ -61,15 +61,15 @@
   }
   /*修改默认分页的样式*/
   .page-item.active .page-link{
-    background-color: #28a745;
-    border-color: #28a745;
-    box-shadow:none;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    box-shadow:none !important;
   }
 
   .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle,.btn-primary:not([disabled]):not(.disabled):focus{
-    background-color: #28a745;
-    border-color: #28a745;
-    box-shadow:none;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    box-shadow:none !important;
     cursor: default;
   }
 
@@ -80,7 +80,7 @@
   }*/
 
   .page-link{
-    color: inherit;
+    color: inherit !important;
   }
   /*每个小模块的标题*/
   .top-slide{
