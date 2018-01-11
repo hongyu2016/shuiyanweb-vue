@@ -19,6 +19,7 @@ Vue.use(BootstrapVue);
 /*Vue.use(VueLazyLoad);
 Vue.use(VueTouch, { name: 'v-touch' });*/
 const host_url='https://shuiyanweb.herokuapp.com';
+//const host_url='http://127.0.0.1:5000';
 Vue.prototype.hostUrl=host_url;
 
 /* eslint-disable no-new */

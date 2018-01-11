@@ -47,10 +47,11 @@
                   </div>
                 </b-col>
                 <b-col cols="12" md="10" class="text-left shuiyan-intro-right">
-                  <p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
+                  <!--<p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
                   <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
-                  <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>
-                  <b-link href="">更多介绍</b-link>
+                  <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>-->
+                  {{intro}}
+                  <b-link href="javascript:;" @click="introShowModal()">更多介绍</b-link>
                   <!--<h4>水研名字的由来</h4>
                   <p>有两个叫法，一叫“水碾”，是因为村里在流经的小河旁建造了一个水碾，据说是利用河水的冲力来碾米等加工粮食的，具体的时间已无从考究，所以后来就叫“水碾村”；但是登记上报到国家收录村庄的时候，用了简写，于是用了“水研”，也就是官方的名字是“水研”。</p>-->
                 </b-col>
@@ -167,6 +168,10 @@
     <b-modal id="modal1" centered title="通知公告" hide-footer lazy header-class="new-model">
       <div class="d-block">{{fulltext}}</div>
     </b-modal>
+    <!--水研简介详情弹出框-->
+    <b-modal id="intro" size="lg" centered title="水研介绍" hide-footer lazy header-class="new-model">
+      <div class="d-block" v-html="introAll"></div>
+    </b-modal>
     <!-- 放大图片 -->
     <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
 
@@ -187,7 +192,9 @@
         fulltext:'公告内容',//公告全部内容
         imgList:[],//水研图集
         showImg:false,//放大
-        imgSrc: ''//放大
+        imgSrc: '',//放大
+        intro:'',  //水研简介
+        introAll:''
       }
     },
     mounted(){
@@ -216,6 +223,22 @@
     },
     methods: {
       getlist(){
+        //首页数据
+        this.$http.get(`${this.hostUrl}/api/index/index`).then((res) =>{
+          if(res.data.success){
+          	this.intro=res.data.data.indexData[0].introduce_simple;
+          	this.introAll=res.data.data.indexData[0].introduce_all;
+          }
+          sr.reveal('.block-main-list,.news-list', {
+            duration: 600,
+            delay: 200,
+            origin: 'bottom',
+            distance: '200px',
+            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+            mobile: true,
+          });
+        });
+      	//轮播图
         this.$http.get(`${this.hostUrl}/api/index/slide`).then((res) =>{
           this.gonggaolist=[ //公告
             {
@@ -286,7 +309,7 @@
               title:'这是水研图片8'
             }
           ];
-          sr.reveal('.block-main-list,.news-list,.index-img-list', {
+          sr.reveal('.index-img-list', {
             duration: 600,
             delay: 200,
             origin: 'bottom',
@@ -297,11 +320,20 @@
         });
 
       },
+      /*
+      * 公告弹出框
+      * */
       showModal (id) {
         console.log(id)
         //拿id去获取内容
 
         this.$root.$emit('bv::show::modal','modal1')
+      },
+      /*
+      * 水研简介弹出框
+      * */
+      introShowModal(){
+        this.$root.$emit('bv::show::modal','intro')
       },
       clickImg(e) {
         this.showImg = true;
@@ -328,6 +360,8 @@
     padding: 30px 0px;
   }
 
+  .d-block{text-align: left}
+  .d-block img{max-width: 100%}
   .notice-main{
     border:2px solid #28a745;
   }

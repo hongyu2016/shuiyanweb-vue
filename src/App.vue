@@ -119,4 +119,19 @@
   .hidden-lg{
     display: none;
   }
+  @media (max-width: 576px){
+    .hidden-sm{
+      display: none;
+    }
+    .hidden-lg{
+      display: block;
+    }
+    .news-focus-img{
+      display: none;
+    }
+    .news-focus-info{
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+  }
 </style>

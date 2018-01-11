@@ -204,21 +204,6 @@
     font-size: 0.8rem;
     color: #7d7d7d;
   }
-  @media (max-width: 576px){
-    .hidden-sm{
-      display: none;
-    }
-    .hidden-lg{
-      display: block;
-    }
-    .news-focus-img{
-      display: none;
-    }
-    .news-focus-info{
-      max-width: 100%;
-      flex: 0 0 100%;
-    }
-  }
 
   .pagination-box{
     margin-bottom: 40px;
