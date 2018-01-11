@@ -177,7 +177,10 @@
   }
   .news-list{
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+  }
+  .news-list>div{
+    margin-bottom: 10px;
   }
   .news-list-item{
     border: 1px solid #f7f7f7;
@@ -204,7 +207,15 @@
     font-size: 0.8rem;
     color: #7d7d7d;
   }
-
+  @media (max-width: 576px){
+    .news-focus-img{
+      display: none;
+    }
+    .news-focus-info{
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+  }
   .pagination-box{
     margin-bottom: 40px;
   }
