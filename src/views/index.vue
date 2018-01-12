@@ -202,7 +202,7 @@
             };
             //新闻
           	this.newsList=dataList.news;
-          	console.log(this.newsList)
+
           }
           sr.reveal('.block-main-list,.news-list', {
             duration: 600,

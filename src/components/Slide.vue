@@ -20,10 +20,14 @@
 
         </ul>
         <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
+        <div class="swiper-pagination page"></div>
         <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next next-btn">
+          <i aria-hidden="true" class="fa fa-angle-right"></i>
+        </div>
+        <div class="swiper-button-prev prev-btn">
+          <i aria-hidden="true" class="fa fa-angle-left"></i>
+        </div>
       </div>
 
     </div>
@@ -131,4 +135,13 @@
     display: inline;
     text-shadow:0 3px 5px #000 ;
   }
+  .prev-btn,.next-btn{
+    background-image:none;
+    line-height: 44px;
+  }
+  .prev-btn>i,.next-btn>i{
+    color: #f58018;
+    font-size: 44px;
+  }
+
 </style>

@@ -134,4 +134,8 @@
       flex: 0 0 100%;
     }
   }
+  /*轮播图*/
+  .page .swiper-pagination-bullet-active{
+    background: #f58018;
+  }
 </style>
