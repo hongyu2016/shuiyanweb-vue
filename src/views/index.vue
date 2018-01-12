@@ -78,7 +78,7 @@
               <b-row>
                 <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
                   <b-card :title="list.title"
-                          :img-src="list.thumb ? list.thumb:'../src/assets/nopic.gif' "
+                          :img-src="list.thumb ? list.thumb:require('../assets/nopic.gif')"
                           :img-alt="list.title"
                           img-top
                           class="img-list"
