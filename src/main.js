@@ -9,8 +9,8 @@ import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueLazyLoad from 'vue-lazyload'
-import VueTouch from 'vue-touch'
+//import VueLazyLoad from 'vue-lazyload'
+//import VueTouch from 'vue-touch'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http=axios;
@@ -18,8 +18,8 @@ Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
 /*Vue.use(VueLazyLoad);
 Vue.use(VueTouch, { name: 'v-touch' });*/
-//const host_url='https://shuiyanweb.herokuapp.com';
-const host_url='http://127.0.0.1:5000';
+const host_url='https://shuiyanweb.herokuapp.com';
+//const host_url='http://127.0.0.1:5000';
 Vue.prototype.hostUrl=host_url;
 
 /* eslint-disable no-new */
