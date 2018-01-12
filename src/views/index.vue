@@ -50,7 +50,7 @@
                   <!--<p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
                   <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
                   <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>-->
-                  {{intro}}
+                  {{intro.introduce_simple}}
                   <b-link href="javascript:;" @click="introShowModal()">更多介绍</b-link>
                   <!--<h4>水研名字的由来</h4>
                   <p>有两个叫法，一叫“水碾”，是因为村里在流经的小河旁建造了一个水碾，据说是利用河水的冲力来碾米等加工粮食的，具体的时间已无从考究，所以后来就叫“水碾村”；但是登记上报到国家收录村庄的时候，用了简写，于是用了“水研”，也就是官方的名字是“水研”。</p>-->
@@ -76,50 +76,18 @@
           <div class="block-main-list news-main">
             <b-container>
               <b-row>
-                <b-col cols="12" md="4" class="news-list">
-                  <b-card title="这是标题"
-                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
-                          img-alt="Img"
+                <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
+                  <b-card :title="list.title"
+                          :img-src="list.thumb ? list.thumb:'../src/assets/nopic.gif' "
+                          :img-alt="list.title"
                           img-top
                           class="img-list"
                   >
                     <div class="news-time">
-                      2017.12.12
+                      {{list.create_time}}
                     </div>
                     <p class="card-text">
-                      这是内容--一篇文章的简介内容吧
-                    </p>
-                    <b-button href="#" variant="success">查看</b-button>
-                  </b-card>
-                </b-col>
-                <b-col cols="12" md="4" class="news-list">
-                  <b-card title="这是标题"
-                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
-                          img-alt="Img"
-                          img-top
-                          class="img-list"
-                  >
-                    <div class="news-time">
-                      2017.12.12
-                    </div>
-                    <p class="card-text">
-                      这是内容--一篇文章的简介内容吧
-                    </p>
-                    <b-button href="#" variant="success">查看</b-button>
-                  </b-card>
-                </b-col>
-                <b-col cols="12" md="4" class="news-list">
-                  <b-card title="这是标题"
-                          img-src="http://c.hiphotos.baidu.com/image/pic/item/472309f79052982270af3f09deca7bcb0b46d45f.jpg"
-                          img-alt="Img"
-                          img-top
-                          class="img-list"
-                  >
-                    <div class="news-time">
-                      2017.12.12
-                    </div>
-                    <p class="card-text">
-                      这是内容--一篇文章的简介内容吧
+                      {{list.intro}}
                     </p>
                     <b-button href="#" variant="success">查看</b-button>
                   </b-card>
@@ -170,7 +138,7 @@
     </b-modal>
     <!--水研简介详情弹出框-->
     <b-modal id="intro" size="lg" centered title="水研介绍" hide-footer lazy header-class="new-model">
-      <div class="d-block" v-html="introAll"></div>
+      <div class="d-block" v-html="intro.introduce_all"></div>
     </b-modal>
     <!-- 放大图片 -->
     <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
@@ -193,8 +161,8 @@
         imgList:[],//水研图集
         showImg:false,//放大
         imgSrc: '',//放大
-        intro:'',  //水研简介
-        introAll:''
+        intro:{},  //水研简介
+        newsList:[]
       }
     },
     mounted(){
@@ -226,8 +194,15 @@
         //首页数据
         this.$http.get(`${this.hostUrl}/api/index/index`).then((res) =>{
           if(res.data.success){
-          	this.intro=res.data.data.indexData[0].introduce_simple;
-          	this.introAll=res.data.data.indexData[0].introduce_all;
+          	let dataList=res.data.data.indexData;
+          	//简介
+          	this.intro={
+              introduce_simple:dataList.intro.introduce_simple,
+              introduce_all:this.introAll=dataList.intro.introduce_all
+            };
+            //新闻
+          	this.newsList=dataList.news;
+          	console.log(this.newsList)
           }
           sr.reveal('.block-main-list,.news-list', {
             duration: 600,
