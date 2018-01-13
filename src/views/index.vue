@@ -89,7 +89,10 @@
                     <p class="card-text">
                       {{list.intro}}
                     </p>
-                    <b-button href="#" variant="success">查看</b-button>
+                    <!--<b-button :href="'/newsdetail/'+list.article_id" variant="success">查看</b-button>-->
+                    <router-link tag="div" :to="{name:'news_detail',params:{id:list.article_id}}">
+                      <b-button href="javascript:;" variant="success">查看</b-button>
+                    </router-link>
                   </b-card>
                 </b-col>
               </b-row>

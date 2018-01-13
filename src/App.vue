@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/page_head.jpg"/>-->
     <!--菜单-->
     <b-menu></b-menu>
     <transition name="slide-left">
@@ -41,6 +40,9 @@
   .no-padding{
     padding: 0;
   }
+  .main{
+    min-height: 400px;
+  }
   /*路由切换动画*/
 
   .slide-left-enter-active,.slide-left-leave-active{
@@ -79,6 +81,10 @@
     box-shadow:none;
   }*/
 
+  /*热点新闻*/
+  .card-img-top{
+    min-height: 200px;
+  }
   .page-link{
     color: inherit !important;
   }
