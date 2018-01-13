@@ -90,7 +90,7 @@
                       {{list.intro}}
                     </p>
                     <!--<b-button :href="'/newsdetail/'+list.article_id" variant="success">查看</b-button>-->
-                    <router-link tag="div" :to="{name:'news_detail',params:{id:list.article_id}}">
+                    <router-link tag="div" :to="{name:'news_detail',params:{id:list.article_id},query:{title:list.title}}">
                       <b-button href="javascript:;" variant="success">查看</b-button>
                     </router-link>
                   </b-card>
@@ -195,33 +195,28 @@
     methods: {
       getlist(){
         //首页数据
-        this.$http.get(`${this.hostUrl}/api/index/index`).then((res) =>{
-          if(res.data.success){
-          	let dataList=res.data.data.indexData;
-          	//简介
-          	this.intro={
+        this.$http.all([
+          this.$http.get(`${this.hostUrl}/api/index/index`),
+          this.$http.get(`${this.hostUrl}/api/index/slide`)
+        ])
+        .then(this.$http.spread((index, slide) =>{
+          // 上面两个请求都完成后，才执行这个回调方法
+          //首页数据
+          if(index.data.success){
+            let dataList=index.data.data.indexData;
+            //简介
+            this.intro={
               introduce_simple:dataList.intro.introduce_simple,
               introduce_all:this.introAll=dataList.intro.introduce_all
             };
             //新闻
-          	this.newsList=dataList.news;
-
+            this.newsList=dataList.news;
           }
-          sr.reveal('.block-main-list,.news-list', {
-            duration: 600,
-            delay: 200,
-            origin: 'bottom',
-            distance: '200px',
-            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-            mobile: true,
-          });
-        });
-      	//轮播图
-        this.$http.get(`${this.hostUrl}/api/index/slide`).then((res) =>{
+          //公告
           this.gonggaolist=[ //公告
             {
-            	id:1,
-            	text:'今天开会，记得来哦',
+              id:1,
+              text:'今天开会，记得来哦',
               time:'2017.12.12'
             },
             {
@@ -245,9 +240,10 @@
               time:'2017.12.12'
             }
           ];
+          //水研风采
           this.imgList=[
             {
-            	id:1,
+              id:1,
               imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
               title:'这是水研图片1'
             },
@@ -287,7 +283,8 @@
               title:'这是水研图片8'
             }
           ];
-          sr.reveal('.index-img-list', {
+
+          sr.reveal('.block-main-list,.news-list,.index-img-list', {
             duration: 600,
             delay: 200,
             origin: 'bottom',
@@ -295,7 +292,8 @@
             easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
             mobile: true,
           });
-        });
+
+        }));
 
       },
       /*
@@ -388,6 +386,12 @@
     margin-bottom: 0;
   }
 
+  .block-main.news{
+    padding-bottom: 20px;
+  }
+  .news-list{
+    margin-bottom: 10px;
+  }
   .img-list{
     border-color: transparent;
   }

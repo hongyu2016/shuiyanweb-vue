@@ -27,7 +27,8 @@ export default new Router({
     {
       path:'/newsdetail/id/:id',
       name:'news_detail',
-      component:newsDetail
+      component:newsDetail,
+      props: (route) => ({ title: route.query.title })
     },
     {
       path:'/contactus',
