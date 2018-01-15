@@ -18,8 +18,8 @@
           <div class="block-main-list notice-main">
             <b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
-                <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.id)" ref="btnShow">{{list.text}}</b-col>
-                <b-col cols="4" md="4" class="text-right notice-time">{{list.time}}</b-col>
+                <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.notice_content,list.create_time,list.notice_author)" ref="btnShow">{{list.notice_content}}</b-col>
+                <b-col cols="4" md="4" class="text-right notice-time">{{list.create_time}}</b-col>
               </b-row>
             </b-container>
           </div>
@@ -134,8 +134,11 @@
     <!--底部信息-->
 
     <!--通知公告弹出框-->
-    <b-modal id="modal1" centered title="通知公告" hide-footer lazy header-class="new-model">
-      <div class="d-block">{{fulltext}}</div>
+    <b-modal id="modal1" centered title="公告详情" hide-footer lazy header-class="new-model">
+      <div class="d-block">
+        <p>发布人：{{alertgonggao.author}}， 发布时间：<span>{{alertgonggao.time}}</span></p>
+        <p>{{alertgonggao.content}}</p>
+      </div>
     </b-modal>
     <!--水研简介详情弹出框-->
     <b-modal id="intro" size="lg" centered title="水研介绍" hide-footer lazy header-class="new-model">
@@ -158,7 +161,7 @@
     data () {
       return {
         gonggaolist:[],
-        fulltext:'公告内容',//公告全部内容
+        alertgonggao:{},
         imgList:[],//水研图集
         showImg:false,//放大
         imgSrc: '',//放大
@@ -195,9 +198,10 @@
         //首页数据
         this.$http.all([
           this.$http.get(`${this.hostUrl}/api/index/index`),
-          this.$http.get(`${this.hostUrl}/api/index/piclist`)
+          this.$http.get(`${this.hostUrl}/api/index/piclist`),
+          this.$http.get(`${this.hostUrl}/api/index/notice`)
         ])
-        .then(this.$http.spread((index, slide) =>{
+        .then(this.$http.spread((index, slide,notice) =>{
           // 上面两个请求都完成后，才执行这个回调方法
           //首页数据
           if(index.data.success){
@@ -211,33 +215,10 @@
             this.newsList=dataList.news;
           }
           //公告
-          this.gonggaolist=[ //公告
-            {
-              id:1,
-              text:'今天开会，记得来哦',
-              time:'2017.12.12'
-            },
-            {
-              id:2,
-              text:'今天开会，记得来睡觉',
-              time:'2017.12.12'
-            },
-            {
-              id:3,
-              text:'今天开会，记得来哦',
-              time:'2017.12.12'
-            },
-            {
-              id:4,
-              text:'今天开会，记得来哦',
-              time:'2017.12.12'
-            },
-            {
-              id:5,
-              text:'今天开会，记得来哦',
-              time:'2017.12.12'
-            }
-          ];
+          if(slide.data.success){
+            this.gonggaolist=notice.data.data;
+          }
+
           //水研风采
           if(slide.data.success){
             this.imgList=slide.data.data.datalist;
@@ -260,9 +241,12 @@
       /*
       * 公告弹出框
       * */
-      showModal (id) {
-        console.log(id)
-        //拿id去获取内容
+      showModal (content,time,author) {
+      	this.alertgonggao={
+          content:content,
+          time:time,
+          author:author
+        };
 
         this.$root.$emit('bv::show::modal','modal1')
       },
