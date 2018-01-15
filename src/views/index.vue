@@ -102,7 +102,7 @@
       </div>
     </div>
     <!--水研风采图集-->
-    <div class="block-main news">
+    <div class="block-main pic-list">
       <div class="container-fluid">
         <div class="block-main-slide">
           <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
@@ -115,25 +115,23 @@
           </div>
           <div class="block-main-list img-main">
             <b-row>
-              <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.id">
+              <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">
-                    <b-img :src="list.imgSrc" fluid :alt="list.title" @click="clickImg($event)"/>
+                    <b-img :src="hostUrl+list.slide_thumb" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="hostUrl+list.slide_img"/>
 
                     <div class="bottom-info">
-                      <span>{{list.title}}</span>
+                      <span>{{list.slide_title}}</span>
                     </div>
                   </div>
                 </a>
               </b-col>
-
             </b-row>
           </div>
         </div>
       </div>
     </div>
     <!--底部信息-->
-
 
     <!--通知公告弹出框-->
     <b-modal id="modal1" centered title="通知公告" hide-footer lazy header-class="new-model">
@@ -197,7 +195,7 @@
         //首页数据
         this.$http.all([
           this.$http.get(`${this.hostUrl}/api/index/index`),
-          this.$http.get(`${this.hostUrl}/api/index/slide`)
+          this.$http.get(`${this.hostUrl}/api/index/piclist`)
         ])
         .then(this.$http.spread((index, slide) =>{
           // 上面两个请求都完成后，才执行这个回调方法
@@ -241,48 +239,11 @@
             }
           ];
           //水研风采
-          this.imgList=[
-            {
-              id:1,
-              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
-              title:'这是水研图片1'
-            },
-            {
-              id:2,
-              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
-              title:'这是水研图片2'
-            },
-            {
-              id:3,
-              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
-              title:'这是水研图片3'
-            },
-            {
-              id:4,
-              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
-              title:'这是水研图片4'
-            },
-            {
-              id:5,
-              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
-              title:'这是水研图片5'
-            },
-            {
-              id:6,
-              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
-              title:'这是水研图片6'
-            },
-            {
-              id:7,
-              imgSrc:'http://demo.sc.chinaz.com/Files/DownLoad/moban/201709/moban2414/images/latestblog1.jpg',
-              title:'这是水研图片7'
-            },
-            {
-              id:8,
-              imgSrc:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514955966765&di=21c3535b64eefa2ab8f3669beb337a2e&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb2de9c82d158ccbfdb9b69fb10d8bc3eb03541c8.jpg',
-              title:'这是水研图片8'
-            }
-          ];
+          if(slide.data.success){
+            this.imgList=slide.data.data.datalist;
+            console.log(this.imgList)
+          }
+
 
           sr.reveal('.block-main-list,.news-list,.index-img-list', {
             duration: 600,
@@ -314,11 +275,11 @@
       clickImg(e) {
         this.showImg = true;
         // 获取当前图片地址
-        this.imgSrc = e.currentTarget.src;
+        this.imgSrc=e.target.getAttribute('data-bigsrc');
       },
       viewImg(){
         this.showImg = false;
-      },
+      }
     },
     components: {
       //'b-menu': menu,
@@ -386,8 +347,9 @@
     margin-bottom: 0;
   }
 
-  .block-main.news{
+  .block-main.pic-list{
     padding-bottom: 20px;
+    padding-top: 0;
   }
   .news-list{
     margin-bottom: 10px;

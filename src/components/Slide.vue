@@ -6,7 +6,7 @@
         <loading v-show="loading"></loading><!--loading-->
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for="item in slideList" :key="item.imgId">
-            <img :src="host+item.slide_img"/>
+            <img :src="hostUrl+item.slide_img"/>
             <div class="img-content">
               <div class="img-title ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
                 <h3>{{item.slide_title}}</h3>
@@ -43,7 +43,6 @@
         name: 'slide',
         data () {
             return {
-              host:'https:shuiyanweb.herokuapp.com',
               slide: 0,
               slideList: [],  //轮播图数据
               loading: false
