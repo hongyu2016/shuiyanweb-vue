@@ -15,6 +15,7 @@
     "bootstrap-vue": "^1.4.0",
     "script-loader": "^0.7.2",
     "scrollreveal": "^3.3.6",
+    "sweet-modal-vue": "^2.0.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
     "vue-baidu-map": "^0.20.0",

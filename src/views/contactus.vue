@@ -17,15 +17,17 @@
       <div class="contact-box">
         <b-form>
           <b-row>
+            <loading v-show="loading"></loading><!--loading-->
             <b-col md="6" cols="12">
+
               <b-form-group id="exampleInputGroup1"
                             label="邮箱地址"
                             label-for="email"
                             description="我们会严格保密您的邮箱地址">
                 <b-form-input id="email"
                               type="email"
-
                               required
+                              v-model="inputValue.email"
                               placeholder="请输入邮箱地址">
                 </b-form-input>
               </b-form-group>
@@ -34,8 +36,8 @@
                             label-for="name">
                 <b-form-input id="name"
                               type="text"
-
                               required
+                              v-model="inputValue.name"
                               placeholder="请输入姓名">
                 </b-form-input>
               </b-form-group>
@@ -44,16 +46,20 @@
               <b-form-group id="text"
                             label="内容"
                             label-for="textarea1">
-                <b-form-textarea id="textarea1"
-                                 placeholder="请输入具体内容"
-                                 :rows="5"
-                                 :max-rows="6">
-                </b-form-textarea>
+                <div>
+                  <b-form-textarea id="textarea1"
+                                   v-model="inputValue.textarea"
+                                   placeholder="请输入内容"
+                                   :rows="5"
+                                   required
+                                   :max-rows="6">
+                  </b-form-textarea>
+                </div>
               </b-form-group>
             </b-col>
           </b-row>
           <div class="text-center">
-            <b-button type="submit" variant="warning">提交</b-button>
+            <b-button type="submit" variant="warning" @click.prevent="postup">提交</b-button>
           </div>
 
         </b-form>
@@ -86,20 +92,34 @@
 
       </div>
     </b-container>
+    <!--弹出框-->
+    <b-modal id="modal1" centered title="提示信息" lazy ok-only ok-title="确定" ok-variant="success" header-class="new-model">
+      <div class="d-block">
+        <p style="margin-bottom: 0;color: #d20202">{{alertInfo}}</p>
+      </div>
+    </b-modal>
   </div>
 </template>
 <script>
   import eventBus from '../assets/eventBus'; //同级组件通信 中央事务总线
   import {BaiduMap,BmOverlay,BmNavigation,BmInfoWindow} from 'vue-baidu-map'; //百度地图
+  import loading from '@/components/loading'
 	export default {
 		name: 'contactus',
 		data () {
 			return {
         //active: false
+        loading: false,
+        inputValue:{
+        	email:'',
+          name:'',
+          textarea:''
+        },
         infoWindow: {
           show: true,
-          contents: '广西北海市合浦县山口镇河面村委 水研村'
-        }
+          contents: '广西北海市合浦县山口镇河面村委 水研村',
+        },
+        alertInfo:''
       }
 		},
     mounted(){
@@ -122,13 +142,60 @@
       },
       infoWindowOpen (e) {
         this.infoWindow.show = true
+      },
+      postup(){
+      	let emails=this.inputValue.email,
+            names=this.inputValue.name,
+            contents=this.inputValue.textarea;
+      	let emailReg=/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+
+      	if(!emails||!names||!contents){
+          this.alertInfo='邮箱，姓名或者内容不能为空';
+          this.$root.$emit('bv::show::modal','modal1');
+      		return false;
+        }
+        if(!emailReg.test(emails)){
+          this.alertInfo='请输入合法的邮箱';
+          this.$root.$emit('bv::show::modal','modal1');
+          return false;
+        }
+        if(contents.length>230){
+          this.alertInfo='请输入230个以内的字符';
+          this.$root.$emit('bv::show::modal','modal1');
+          return false;
+        }
+        this.loading = true;
+      	let postData={
+          'email':emails,
+          'name':names,
+          'content':contents
+        };
+
+        this.$http.post(`${this.hostUrl}/api/contact/add`,postData).then((res) =>{
+          if(res.data.success){
+            this.loading = false;
+            this.alertInfo=res.data.errmsg;
+            this.$root.$emit('bv::show::modal','modal1');
+            this.inputValue.email='';
+            this.inputValue.name='';
+            this.inputValue.textarea='';
+          }else {
+            this.alertInfo=res.data.errmsg;
+            this.$root.$emit('bv::show::modal','modal1');
+          }
+        }).catch((err)=>{
+          this.alertInfo='服务器错误，请重试';
+          this.$root.$emit('bv::show::modal','modal1');
+        });
+
       }
     },
     components: {
       BaiduMap,
       BmOverlay,
       BmNavigation,
-      BmInfoWindow
+      BmInfoWindow,
+      loading
     }
 	}
 </script>
@@ -136,6 +203,7 @@
   .contact-box{
     text-align: left;
     margin-bottom: 20px;
+    position: relative;
   }
   @media (max-width: 576px){
 
