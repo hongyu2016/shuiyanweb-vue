@@ -144,4 +144,9 @@
   .page .swiper-pagination-bullet-active{
     background: #f58018;
   }
+  /*水研图库*/
+  .index-img-list .index-img-column{
+    min-height: 100px;
+
+  }
 </style>

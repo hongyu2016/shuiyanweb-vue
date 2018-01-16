@@ -47,11 +47,12 @@
                   </div>
                 </b-col>
                 <b-col cols="12" md="10" class="text-left shuiyan-intro-right">
+                  <loading v-show="loading"></loading><!--loading-->
                   <!--<p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
                   <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
                   <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>-->
                   {{intro.introduce_simple}}
-                  <b-link href="javascript:;" @click="introShowModal()">更多介绍</b-link>
+                  <b-link href="javascript:;" @click="introShowModal()" class="more">更多介绍</b-link>
                   <!--<h4>水研名字的由来</h4>
                   <p>有两个叫法，一叫“水碾”，是因为村里在流经的小河旁建造了一个水碾，据说是利用河水的冲力来碾米等加工粮食的，具体的时间已无从考究，所以后来就叫“水碾村”；但是登记上报到国家收录村庄的时候，用了简写，于是用了“水研”，也就是官方的名字是“水研”。</p>-->
                 </b-col>
@@ -76,6 +77,7 @@
           <div class="block-main-list news-main">
             <b-container>
               <b-row>
+                <loading v-show="loading"></loading><!--loading-->
                 <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
                   <b-card :title="list.title"
                           :img-src="list.thumb ? list.thumb:require('../assets/nopic.gif')"
@@ -105,6 +107,7 @@
     <div class="block-main pic-list">
       <div class="container-fluid">
         <div class="block-main-slide">
+
           <div slot="top-title" class="top-slide"> <!--定义的slot在子组件 toptitle中-->
             <h3 class="title">
               <i></i>
@@ -115,6 +118,7 @@
           </div>
           <div class="block-main-list img-main">
             <b-row>
+              <loading v-show="loading"></loading><!--loading-->
               <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">
@@ -155,7 +159,7 @@
   import slide from '@/components/Slide' //轮播图
   import scrollreveal from 'scrollreveal'  //滚动动画
   import bigImg from '@/components/MagnifyImg' //图片放大
-
+  import loading from '@/components/loading'
   export default {
     name: 'index',
     data () {
@@ -166,7 +170,8 @@
         showImg:false,//放大
         imgSrc: '',//放大
         intro:{},  //水研简介
-        newsList:[]
+        newsList:[],
+        loading: false
       }
     },
     mounted(){
@@ -195,6 +200,7 @@
     },
     methods: {
       getlist(){
+        this.loading = true;
         //首页数据
         this.$http.all([
           this.$http.get(`${this.hostUrl}/api/index/index`),
@@ -204,6 +210,7 @@
         .then(this.$http.spread((index, slide,notice) =>{
           // 上面两个请求都完成后，才执行这个回调方法
           //首页数据
+          this.loading = false;
           if(index.data.success){
             let dataList=index.data.data.indexData;
             //简介
@@ -269,6 +276,7 @@
       //'b-menu': menu,
       'b-slide': slide,
       'big-img':bigImg,
+      'loading':loading
     }
 
   }
@@ -294,6 +302,12 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+  }
+  .notice-time {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
   }
   @media (max-width: 500px){
     .notice-text{
@@ -330,7 +344,17 @@
   .shuiyan-intro-right p{
     margin-bottom: 0;
   }
+  .more{
+    color: #f58018;
+  }
+  .more:hover{
+    color: #f58018;
+  }
 
+  .block-main-list{
+    position: relative;
+    min-height: 200px;
+  }
   .block-main.pic-list{
     padding-bottom: 20px;
     padding-top: 0;
