@@ -66,6 +66,7 @@
     background-color: #28a745 !important;
     border-color: #28a745 !important;
     box-shadow:none !important;
+    color: #fff !important;
   }
 
   .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle,.btn-primary:not([disabled]):not(.disabled):focus{
@@ -73,6 +74,14 @@
     border-color: #28a745 !important;
     box-shadow:none !important;
     cursor: default;
+    color: #fff !important;
+  }
+  .page-box{
+    margin-bottom: 25px;
+  }
+  .page-box .pagination{
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   /*.page-active:not([disabled]):not(.disabled).active{
@@ -87,6 +96,9 @@
   }
   .page-link{
     color: inherit !important;
+  }
+  .page-item.disabled .page-link{
+    color: #868e96 !important;
   }
   /*每个小模块的标题*/
   .top-slide{

@@ -14,7 +14,7 @@ export default new Router({
       component: index
     },
     {
-      path: '/news/page/:page',
+      path: '/news',
       name: 'news',
       component: news,
       /*children:[

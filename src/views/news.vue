@@ -32,94 +32,103 @@
       </div>
       <!--新闻列表-->
       <b-row class="news-list">
-        <b-col cols="6" md="3">
+        <loading v-show="loading"></loading><!--loading-->
+        <b-col cols="6" md="3" v-for="data in list" :key="data.article_id">
           <a href="">
             <div  class="news-list-item text-left">
               <div class="img">
                 <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
               </div>
               <div class="news-list-bottom">
-                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-                <p class="news-time">2018-1-5</p>
-              </div>
-            </div>
-          </a>
-        </b-col>
-        <b-col cols="6" md="3">
-          <a href="">
-            <div  class="news-list-item text-left">
-              <div class="img">
-                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
-              </div>
-              <div class="news-list-bottom">
-                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-                <p class="news-time">2018-1-5</p>
-              </div>
-            </div>
-          </a>
-        </b-col>
-        <b-col cols="6" md="3">
-          <a href="">
-            <div  class="news-list-item text-left">
-              <div class="img">
-                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
-              </div>
-              <div class="news-list-bottom">
-                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-                <p class="news-time">2018-1-5</p>
-              </div>
-            </div>
-          </a>
-        </b-col>
-        <b-col cols="6" md="3">
-          <a href="">
-            <div  class="news-list-item text-left">
-              <div class="img">
-                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
-              </div>
-              <div class="news-list-bottom">
-                <h1>这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题这是一个新闻标题</h1>
-                <p class="news-time">2018-1-5</p>
+                <h1>{{data.title}}</h1>
+                <p class="news-time">{{data.create_time}}</p>
               </div>
             </div>
           </a>
         </b-col>
       </b-row>
-
-      <b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="10" v-model="currentPage"  class="pagination-box" hide-goto-end-buttons prev-text="上一页" next-text="下一页" active-class="page-active" base-url="#"/>
-
+      <nav class="page-box">
+        <paginate
+          :page-count="totalPages"
+          :click-handler="runPage"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination b-pagination pagination-md'"
+          page-class="page-item"
+          page-link-class="page-link"
+          active-class="page-item active"
+          prev-class="page-item"
+          next-class="page-item"
+          prev-link-class="page-link"
+          next-link-class="page-link"
+          :page-range="1"
+        >
+        </paginate>
+      </nav>
+      </b-pagination>
     </b-container>
   </div>
 </template>
 <script>
   import eventBus from '../assets/eventBus'; //同级组件通信 中央事务总线
-	export default {
+  import loading from '@/components/loading';
+  import Paginate from 'vuejs-paginate';
+  export default {
 		name: 'news',
 		data () {
 			return {
-        currentPage:1
+        currentPage:1,
+        totalPages:1,
+        totalRows:1,
+        list:[],
+        loading: false
       }
 		},
-    mounted(){
-
-      this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;  //初始化时获取地址栏的页码
-
+    created(){
     },
+    beforeMount(){
+    },
+    mounted(){
+      this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;  //初始化时获取地址栏的页码
+      this.getList(this.currentPage);
+    },
+
     watch:{
       //路由切换时进行判断--获取数据的操作
       '$route'(to,from){
       	//console.log(to)
         if(to.name=='news'){
           this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;
+
           //请求 服务器 拿数据
+          this.getList(this.currentPage);
+
         }
       }
     },
 		methods: {
-      linkGen (pageNum) {
-        eventBus.$emit('userC','测试下//同级组件通信 中央事务总线'); //同级组件通信 中央事务总线
-        return '#/news/page/'+pageNum
-        }
+      runPage(pageNum){
+        //eventBus.$emit('userC','测试下//同级组件通信 中央事务总线'); //同级组件通信 中央事务总线
+        console.log(pageNum)
+        this.getList(pageNum)
+      },
+      getList(page){
+        this.loading = true;
+        this.$http.get(`${this.hostUrl}/api/news/newslist`,{params:{'page':page}}).then((res)=>{
+          if(res.data.success==true){
+            this.loading = false;
+          	let list=res.data.data;
+          	this.totalPages=list.totalPages;
+            this.list=list.data;
+          }
+        }).catch((err)=>{
+
+        });
+      }
+    },
+    components: {
+      'loading':loading,
+      'paginate':Paginate
     }
 	}
 </script>

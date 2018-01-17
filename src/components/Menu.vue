@@ -13,7 +13,7 @@
           <router-link tag="li" to="/" class="nav-item menu-link" exact>
             <a href="" class="nav-link">主页</a>
           </router-link>
-          <router-link tag="li" :to="{name:'news',params:{page:1}}" class="nav-item menu-link" :class="{'menu-active':active}" exact>
+          <router-link tag="li" :to="{name:'news'}" class="nav-item menu-link" exact>
             <a href="" class="nav-link">水研新闻</a>
           </router-link>
           <router-link tag="li" :to="{name:'contactus'}" class="nav-item menu-link" exact>
@@ -68,15 +68,15 @@
             // Code that will run only after the
             // entire view has been rendered
             //同级组件通信 中央事务总线
-            eventBus.$on('userC',(msg)=>{
+            /*eventBus.$on('userC',(msg)=>{
             	this.msg=msg;
-            });
+            });*/
             //如果当前路由是新闻，则选中新闻菜单
-            if(this.$route.matched[0].name=='news'){
+            /*if(this.$route.matched[0].name=='news'){
               this.active=true;
             }else{
               this.active=false;
-            }
+            }*/
 
             //监听滚动
             window.addEventListener('scroll', this.handleScroll);
@@ -95,11 +95,11 @@
             }
           },
           '$route'(to,from){
-          	if(to.matched[0].name=='news'){
+          	/*if(to.matched[0].name=='news'){
           		this.active=true;
             }else{
               this.active=false;
-            }
+            }*/
           }
         }
     }

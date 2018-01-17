@@ -229,7 +229,7 @@
           //水研风采
           if(slide.data.success){
             this.imgList=slide.data.data.datalist;
-            console.log(this.imgList)
+
           }
 
 

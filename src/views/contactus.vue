@@ -159,8 +159,13 @@
           this.$root.$emit('bv::show::modal','modal1');
           return false;
         }
+        if(names.length>10){
+          this.alertInfo='姓名请输入10个以内的字符';
+          this.$root.$emit('bv::show::modal','modal1');
+          return false;
+        }
         if(contents.length>230){
-          this.alertInfo='请输入230个以内的字符';
+          this.alertInfo='反馈内容请输入230个以内的字符';
           this.$root.$emit('bv::show::modal','modal1');
           return false;
         }
