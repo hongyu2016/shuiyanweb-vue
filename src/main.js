@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import FastClick from 'fastclick'
 //import VueLazyLoad from 'vue-lazyload'
 //import VueTouch from 'vue-touch'
 
@@ -16,6 +17,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$http=axios;
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
+FastClick.attach(document.body);
 /*Vue.use(VueLazyLoad);
 Vue.use(VueTouch, { name: 'v-touch' });*/
 const host_url='https://shuiyanweb.herokuapp.com';
