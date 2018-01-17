@@ -14,7 +14,7 @@
     </div>
     <b-container>
       <!--焦点一条新闻-->
-      <div class="news-focus-box">
+      <!--<div class="news-focus-box">
         <div class="news-focus-img">
           <img src="../assets/page_head_small.jpg"/>
         </div>
@@ -29,22 +29,25 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--新闻列表-->
       <b-row class="news-list">
         <loading v-show="loading"></loading><!--loading-->
         <b-col cols="6" md="3" v-for="data in list" :key="data.article_id">
-          <a href="">
-            <div  class="news-list-item text-left">
-              <div class="img">
-                <b-img-lazy src="http://www.ganso.com.cn/upload/images/20170804/%E4%BC%81%E4%B8%9A%E5%AE%98%E7%BD%9137123952.jpg" fluid-grow/>
+          <router-link tag="div" :to="{name:'news_detail',params:{id:data.article_id},query:{title:data.title}}">
+            <a href="">
+              <div  class="news-list-item text-left">
+                <div class="img">
+                  <b-img-lazy :src="data.thumb ? data.thumb:require('../assets/nopic.gif')" fluid-grow/>
+                </div>
+                <div class="news-list-bottom">
+                  <h1>{{data.title}}</h1>
+                  <p class="news-time">{{data.create_time}}</p>
+                </div>
               </div>
-              <div class="news-list-bottom">
-                <h1>{{data.title}}</h1>
-                <p class="news-time">{{data.create_time}}</p>
-              </div>
-            </div>
-          </a>
+            </a>
+          </router-link>
+
         </b-col>
       </b-row>
       <nav class="page-box">
@@ -94,22 +97,12 @@
     },
 
     watch:{
-      //路由切换时进行判断--获取数据的操作
-      '$route'(to,from){
-      	//console.log(to)
-        if(to.name=='news'){
-          this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;
-
-          //请求 服务器 拿数据
-          this.getList(this.currentPage);
-
-        }
-      }
+      //路由切换时进行判断
     },
 		methods: {
       runPage(pageNum){
         //eventBus.$emit('userC','测试下//同级组件通信 中央事务总线'); //同级组件通信 中央事务总线
-        console.log(pageNum)
+        this.list=[];
         this.getList(pageNum)
       },
       getList(page){
@@ -187,6 +180,8 @@
   .news-list{
     margin-top: 40px;
     margin-bottom: 30px;
+    position: relative;
+    min-height: 300px;
   }
   .news-list>div{
     margin-bottom: 10px;

@@ -40,6 +40,7 @@
         this.$http.get(`${this.hostUrl}/api/news/detail`,{params:{news_id:news_id}}).then((res) =>{
           if(res.data.success){
             this.loading = false;
+            this.title=res.data.data.title;
             this.newsDetail=res.data.data;
           }
         });
