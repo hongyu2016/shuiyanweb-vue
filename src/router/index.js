@@ -11,12 +11,14 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: index
+      component: index,
+      meta: { keepAlive: true }
     },
     {
       path: '/news',
       name: 'news',
       component: news,
+      meta: { keepAlive: true }
       /*children:[
         {
           path: '/news/page/:page',
@@ -33,7 +35,8 @@ export default new Router({
     {
       path:'/contactus',
       name:'contactus',
-      component:contactus
+      component:contactus,
+      meta: { keepAlive: true }
     },
     {
       path:'*',

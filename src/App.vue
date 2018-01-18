@@ -3,7 +3,12 @@
     <!--菜单-->
     <b-menu></b-menu>
     <transition name="slide-left">
-      <router-view/>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"/>
+      </keep-alive>
+    </transition>
+    <transition name="slide-left">
+      <router-view v-if="!$route.meta.keepAlive"/>
     </transition>
     <b-foot></b-foot>
   </div>

@@ -3,8 +3,7 @@
     <b-container>
       <b-row>
         <b-col cols="12" md="12" class="friend-link">
-          <b-link href="http://www.taobao.com" target="_blank" class="friend-link-a">淘宝网</b-link>
-          <b-link href="http://www.baidu.com" target="_blank" class="friend-link-a">百度一下</b-link>
+          <b-link :href="list.friendlink_url" target="_blank" class="friend-link-a" v-for="list in link" :key="list.friendlink_id">{{list.friendlink_name}}</b-link>
         </b-col>
         <b-col cols="12" md="12" class="copyright">
           Copyright © 2017.水研村 All rights reserve
@@ -17,9 +16,22 @@
 	export default {
 		name: '',
 		data () {
-			return {}
+			return {
+				link:[]
+      }
 		},
-		methods: {}
+    mounted(){
+			this.getlist();
+    },
+		methods: {
+      getlist(){
+        this.$http.get(`${this.hostUrl}/api/index/friendlink`).then((res)=>{
+          if(res.data.success){
+          	this.link=res.data.data;
+          }
+        });
+      }
+    }
 	}
 </script>
 <style scoped>
