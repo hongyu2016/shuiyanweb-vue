@@ -16,6 +16,10 @@
             <span class="des">水研重要的通知公告信息都在这</span>
           </div>
           <div class="block-main-list notice-main">
+            <loading v-show="loading"></loading><!--loading-->
+            <div class="nodata" v-if="gonggaolist.length<=0">
+              暂无公告纪录
+            </div>
             <b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
                 <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.notice_content,list.create_time,list.notice_author)" ref="btnShow">{{list.notice_content}}</b-col>
@@ -78,6 +82,9 @@
             <b-container>
               <b-row>
                 <loading v-show="loading"></loading><!--loading-->
+                <div class="nodata" v-if="newsList.length<=0">
+                  暂无新闻纪录
+                </div>
                 <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
                   <b-card :title="list.title"
                           :img-src="list.thumb ? list.thumb:require('../assets/nopic.gif')"
@@ -119,6 +126,9 @@
           <div class="block-main-list img-main">
             <b-row>
               <loading v-show="loading"></loading><!--loading-->
+              <div class="nodata" v-if="newsList.length<=0">
+                暂无图集纪录
+              </div>
               <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">

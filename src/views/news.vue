@@ -33,6 +33,9 @@
       <!--新闻列表-->
       <b-row class="news-list">
         <loading v-show="loading"></loading><!--loading-->
+        <div class="nodata" v-if="list.length<=0">
+          暂无新闻纪录
+        </div>
         <b-col cols="6" md="3" v-for="data in list" :key="data.article_id">
           <router-link tag="div" :to="{name:'news_detail',params:{id:data.article_id},query:{title:data.title}}">
             <a href="">
@@ -50,7 +53,7 @@
 
         </b-col>
       </b-row>
-      <nav class="page-box">
+      <nav class="page-box" v-if="totalPages>=1">
         <paginate
           :page-count="totalPages"
           :click-handler="runPage"
@@ -95,7 +98,6 @@
       this.currentPage=this.$route.params.page ? Number(this.$route.params.page):1;  //初始化时获取地址栏的页码
       this.getList(this.currentPage);
     },
-
     watch:{
       //路由切换时进行判断
     },
@@ -113,6 +115,7 @@
           	let list=res.data.data;
           	this.totalPages=list.totalPages;
             this.list=list.data;
+
           }
         }).catch((err)=>{
 
