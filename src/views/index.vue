@@ -206,7 +206,15 @@
           viewOffset: { top: 0, right: 0, bottom: 0, left: 0 }
         });
         this.getlist();
+        //监听websocket
+        this.$options.sockets.noticeList = (data) => {
+          console.log(data)
+        }
       })
+    },
+    sockets:{
+      connect(){
+      }
     },
     methods: {
       getlist(){

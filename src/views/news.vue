@@ -129,7 +129,6 @@
 	}
 </script>
 <style scoped>
-
   .news-focus-box{
     display: flex;
     border: 1px solid #f7f7f7;
@@ -138,7 +137,6 @@
   .news-focus-img,.news-focus-info{
     flex: 0 0 50%;
     max-width: 50%;
-
   }
   .news-focus-box img{
     width: 100%;
