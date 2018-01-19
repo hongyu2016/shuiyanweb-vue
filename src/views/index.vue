@@ -16,11 +16,11 @@
             <span class="des">水研重要的通知公告信息都在这</span>
           </div>
           <div class="block-main-list notice-main">
-            <loading v-show="loading"></loading><!--loading-->
+            <loading v-show="loading_notice"></loading><!--loading-->
             <div class="nodata" v-if="gonggaolist.length<=0">
               暂无公告纪录
             </div>
-            <div class="swiper-container" id="notice">
+            <div class="swiper-container swiper-container-notice" id="notice">
               <div class="swiper-wrapper">
                 <div class="swiper-slide container" >
                   <b-row class="notice-ul" v-for="list in gonggaolist" :key="list.id">
@@ -196,7 +196,8 @@
         imgSrc: '',//放大
         intro:{},  //水研简介
         newsList:[],
-        loading: false
+        loading: false,//除公告外的loading
+        loading_notice:false  //公告loading
       }
     },
     mounted(){
@@ -227,20 +228,35 @@
     sockets:{
       connect(){
         //监听websocket
+        this.loading_notice = true;
         this.$options.sockets.noticeList = (data) => {
         	//公告列表
-          this.gonggaolist=data;
-          this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
-            let mySwiperNotice = new Swiper('#notice',{
-              direction: 'vertical',
-              slidesPerView: 'auto',
-              freeMode: true,
-              scrollbar: {
-                el: '.swiper-scrollbar',
-              },
-              mousewheel: true,
+          if(data){
+            this.loading_notice = false;
+            this.gonggaolist=data;
+            sr.reveal('.notice-main', {
+              duration: 600,
+              delay: 200,
+              origin: 'bottom',
+              distance: '200px',
+              easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+              mobile: true,
             });
-          });
+
+            this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
+              let mySwiperNotice = new Swiper('#notice',{
+                direction: 'vertical',
+                slidesPerView: 'auto',
+                freeMode: true,
+                scrollbar: {
+                  el: '.swiper-scrollbar',
+                },
+                mousewheel: true,
+              });
+            });
+
+          }
+
         }
       }
     },
@@ -273,11 +289,11 @@
           }*/
 
           //水研风采
-          /*if(slide.data.success){
+          if(slide.data.success){
             this.imgList=slide.data.data.datalist;
 
-          }*/
-          sr.reveal('.block-main-list,.news-list,.index-img-list', {
+          }
+          sr.reveal('.news-list,.index-img-list', {
             duration: 600,
             delay: 200,
             origin: 'bottom',
@@ -336,7 +352,7 @@
   .d-block{text-align: left}
   .d-block img{max-width: 100%}
 
-  .swiper-container {
+  .swiper-container-notice {
     width: 100%;
     height: 100%;
     margin-left: auto;
@@ -348,7 +364,7 @@
 
   .notice-main{
     border:2px solid #28a745;
-    height: 300px;
+    height: 250px;
   }
   .notice-ul{
     padding: 5px 0px;

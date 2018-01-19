@@ -29,7 +29,7 @@ Vue.use(BootstrapVue);
 
 const host_url_pro='https://shuiyanweb.herokuapp.com';
 const host_url_dev='http://127.0.0.1:5000';
-const host_url=host_url_dev;
+const host_url=host_url_pro;
 Vue.use(VueSocketio, host_url);//websocket
 /*Vue.use(VueLazyLoad);
 Vue.use(VueTouch, { name: 'v-touch' });*/

@@ -6,6 +6,7 @@
         <loading v-show="loading"></loading><!--loading-->
         <ul class="swiper-wrapper">
           <li class="swiper-slide" v-for="item in slideList" :key="item.imgId">
+            <a :href="item.slide_jumpurl">
             <img :src="hostUrl+item.slide_img"/>
             <div class="img-content">
               <div class="img-title ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
@@ -15,7 +16,7 @@
                 <p>{{item.slide_text}}</p>
               </div>
             </div>
-
+            </a>
           </li>
 
         </ul>
