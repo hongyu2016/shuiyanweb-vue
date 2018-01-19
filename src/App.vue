@@ -45,6 +45,9 @@
   .no-padding{
     padding: 0;
   }
+  .text-orange{
+    color: #f58018;
+  }
   .main{
     min-height: 400px;
   }

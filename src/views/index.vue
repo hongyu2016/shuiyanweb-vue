@@ -20,12 +20,27 @@
             <div class="nodata" v-if="gonggaolist.length<=0">
               暂无公告纪录
             </div>
-            <b-container v-for="list in gonggaolist" :key="list.id">
+            <div class="swiper-container" id="notice">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide container" >
+                  <b-row class="notice-ul" v-for="list in gonggaolist" :key="list.id">
+                    <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.notice_content,list.create_time,list.notice_author)" ref="btnShow">{{list.notice_title}}</b-col>
+                    <b-col cols="4" md="4" class="text-right notice-time">{{list.create_time}}</b-col>
+                  </b-row>
+
+                </div>
+
+              </div>
+              <!-- Add Pagination -->
+              <div class="swiper-scrollbar"></div>
+
+            </div>
+            <!--<b-container v-for="list in gonggaolist" :key="list.id">
               <b-row class="notice-ul">
-                <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.notice_content,list.create_time,list.notice_author)" ref="btnShow">{{list.notice_content}}</b-col>
+                <b-col cols="8" md="8" class="notice-text text-left" @click="showModal(list.notice_content,list.create_time,list.notice_author)" ref="btnShow">{{list.notice_title}}</b-col>
                 <b-col cols="4" md="4" class="text-right notice-time">{{list.create_time}}</b-col>
               </b-row>
-            </b-container>
+            </b-container>-->
           </div>
         </div>
       </div>
@@ -150,8 +165,8 @@
     <!--通知公告弹出框-->
     <b-modal id="modal1" centered title="公告详情" hide-footer lazy header-class="new-model">
       <div class="d-block">
-        <p>发布人：{{alertgonggao.author}}， 发布时间：<span>{{alertgonggao.time}}</span></p>
-        <p>{{alertgonggao.content}}</p>
+        <p><span class="text-orange">发布人：</span>{{alertgonggao.author}}， <span class="text-orange">发布时间：</span><span>{{alertgonggao.time}}</span></p>
+        <p><span class="text-orange">公告内容：</span>{{alertgonggao.content}}</p>
       </div>
     </b-modal>
     <!--水研简介详情弹出框-->
@@ -162,7 +177,6 @@
     <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
 
   </div>
-
 </template>
 <script>
 
@@ -170,6 +184,7 @@
   import scrollreveal from 'scrollreveal'  //滚动动画
   import bigImg from '@/components/MagnifyImg' //图片放大
   import loading from '@/components/loading'
+  import Swiper from '../../static/swiper/swiper.min.js'
   export default {
     name: 'index',
     data () {
@@ -206,14 +221,27 @@
           viewOffset: { top: 0, right: 0, bottom: 0, left: 0 }
         });
         this.getlist();
-        //监听websocket
-        this.$options.sockets.noticeList = (data) => {
-          console.log(data)
-        }
+
       })
     },
     sockets:{
       connect(){
+        //监听websocket
+        this.$options.sockets.noticeList = (data) => {
+        	//公告列表
+          this.gonggaolist=data;
+          this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
+            let mySwiperNotice = new Swiper('#notice',{
+              direction: 'vertical',
+              slidesPerView: 'auto',
+              freeMode: true,
+              scrollbar: {
+                el: '.swiper-scrollbar',
+              },
+              mousewheel: true,
+            });
+          });
+        }
       }
     },
     methods: {
@@ -223,9 +251,9 @@
         this.$http.all([
           this.$http.get(`${this.hostUrl}/api/index/index`),
           this.$http.get(`${this.hostUrl}/api/index/piclist`),
-          this.$http.get(`${this.hostUrl}/api/index/notice`)
+          //this.$http.get(`${this.hostUrl}/api/index/notice`)
         ])
-        .then(this.$http.spread((index, slide,notice) =>{
+        .then(this.$http.spread((index, slide) =>{
           // 上面两个请求都完成后，才执行这个回调方法
           //首页数据
           this.loading = false;
@@ -240,17 +268,15 @@
             this.newsList=dataList.news;
           }
           //公告
-          if(slide.data.success){
+          /*if(notice.data.success){
             this.gonggaolist=notice.data.data;
-          }
+          }*/
 
           //水研风采
-          if(slide.data.success){
+          /*if(slide.data.success){
             this.imgList=slide.data.data.datalist;
 
-          }
-
-
+          }*/
           sr.reveal('.block-main-list,.news-list,.index-img-list', {
             duration: 600,
             delay: 200,
@@ -309,8 +335,20 @@
 
   .d-block{text-align: left}
   .d-block img{max-width: 100%}
+
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-slide {
+    height: auto;
+  }
+
   .notice-main{
     border:2px solid #28a745;
+    height: 300px;
   }
   .notice-ul{
     padding: 5px 0px;
