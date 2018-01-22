@@ -223,43 +223,53 @@
         });
         this.getlist();
 
+        if (!!window.WebSocket && window.WebSocket.prototype.send){
+          //支持socket
+          //监听websocket
+          this.loading_notice = true;
+
+          this.socket.on('connect', () => {
+            //监听连接
+          });
+          this.socket.on('noticeList', (data) => {
+            //监听公告列表变化
+            //公告列表
+            if(data){
+              this.loading_notice = false;
+              this.gonggaolist=data;
+              sr.reveal('.notice-main', {
+                duration: 600,
+                delay: 200,
+                origin: 'bottom',
+                distance: '200px',
+                easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+                mobile: true,
+              });
+
+              this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
+                let mySwiperNotice = new Swiper('#notice',{
+                  direction: 'vertical',
+                  slidesPerView: 'auto',
+                  freeMode: true,
+                  scrollbar: {
+                    el: '.swiper-scrollbar',
+                  },
+                  mousewheel: true,
+                });
+              });
+            }else {
+              this.loading_notice = false;
+              this.gonggaolist=[];
+            }
+            
+          });
+
+        }else{
+        	//不支持socket
+        }
       })
     },
-    sockets:{
-      connect(){
-        //监听websocket
-        this.loading_notice = true;
-        this.$options.sockets.noticeList = (data) => {
-        	//公告列表
-          if(data){
-            this.loading_notice = false;
-            this.gonggaolist=data;
-            sr.reveal('.notice-main', {
-              duration: 600,
-              delay: 200,
-              origin: 'bottom',
-              distance: '200px',
-              easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-              mobile: true,
-            });
 
-            this.$nextTick(function () {   //异步执行 DOM 更新。只要观察到数据变化，执行相应的动作
-              let mySwiperNotice = new Swiper('#notice',{
-                direction: 'vertical',
-                slidesPerView: 'auto',
-                freeMode: true,
-                scrollbar: {
-                  el: '.swiper-scrollbar',
-                },
-                mousewheel: true,
-              });
-            });
-
-          }
-
-        }
-      }
-    },
     methods: {
       getlist(){
         this.loading = true;
@@ -338,7 +348,6 @@
       'big-img':bigImg,
       'loading':loading
     }
-
   }
 </script>
 <style>
@@ -434,6 +443,15 @@
   .news-list{
     margin-bottom: 10px;
   }
+  .card.img-list{
+    transition: all 0.2s ease-out 0s;
+    position: relative;
+    top: 0;
+  }
+  .card.img-list:hover{
+    top: -5px;
+    box-shadow: 2px 2px 10px 1px #adabab;
+  }
   .img-list{
     border-color: transparent;
   }
@@ -445,7 +463,6 @@
     padding: 3px 5px;
     color: #fff;
   }
-
   /*水研图集*/
   .index-img-list .index-img-column{
     position: relative;

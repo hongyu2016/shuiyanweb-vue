@@ -43,7 +43,7 @@
     color: #2c3e50;
   }
   .no-padding{
-    padding: 0;
+    padding: 0 !important;
   }
   .text-orange{
     color: #f58018;

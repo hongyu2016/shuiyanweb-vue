@@ -9,7 +9,9 @@ import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueSocketio from 'vue-socket.io';
+//import VueSocketio from 'vue-socket.io';
+import io from 'socket.io-client'
+//const io = require('socket.io-client');
 
 //import FastClick from 'fastclick'
 //import VueLazyLoad from 'vue-lazyload'
@@ -24,13 +26,16 @@ if ('addEventListener' in document) {
   }, false);
 }
 Vue.prototype.$http=axios;
+
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
 
 const host_url_pro='https://shuiyanweb.herokuapp.com';
 const host_url_dev='http://127.0.0.1:5000';
 const host_url=host_url_pro;
-Vue.use(VueSocketio, host_url);//websocket
+const socket = io(host_url);
+Vue.prototype.socket=socket; //全局注册socket 以便在其他组件使用
+//Vue.use(VueSocketio, host_url);//websocket
 /*Vue.use(VueLazyLoad);
 Vue.use(VueTouch, { name: 'v-touch' });*/
 //const host_url='https://shuiyanweb.herokuapp.com';

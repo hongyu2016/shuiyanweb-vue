@@ -12,9 +12,9 @@
               <div class="img-title ani" swiper-animate-effect="bounceInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
                 <h3>{{item.slide_title}}</h3>
               </div>
-              <div class="img-text ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="0.8s" swiper-animate-delay="0.5s">
+              <!--<div class="img-text ani" swiper-animate-effect="bounceInUp" swiper-animate-duration="0.8s" swiper-animate-delay="0.5s">
                 <p>{{item.slide_text}}</p>
-              </div>
+              </div>-->
             </div>
             </a>
           </li>
@@ -104,13 +104,14 @@
   .swiper-container {
     width:100%;
     max-height: 900px;
-    min-height: 200px;
+    min-height: 450px;
   }
   .swiper-wrapper{
     display: flex;
   }
   .swiper-slide{
     max-height: 900px;
+    min-height: 450px;
   }
   .swiper-slide img{
     width: 100%;
@@ -121,10 +122,14 @@
     top: 50%;
     transform: translate(-50%,-50%);
     color: #fff;
+    width: 90%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .img-title{
     margin-bottom: 10px;
-
   }
   .img-title,.img-text>p{
     padding: 4px 12px;
@@ -142,6 +147,25 @@
   .prev-btn>i,.next-btn>i{
     color: #f58018;
     font-size: 44px;
+  }
+  @media (max-width: 576px){
+    .swiper-container{
+      min-height: 200px;
+    }
+    .swiper-slide{
+      max-height: 300px;
+      min-height: 200px;
+    }
+    .img-title{
+      margin-bottom: 0;
+    }
+    .img-title>h3{
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    .img-title p{
+      font-size: 14px;
+    }
   }
 
 </style>
