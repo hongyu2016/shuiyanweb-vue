@@ -41,7 +41,7 @@
             <a href="">
               <div  class="news-list-item text-left">
                 <div class="img">
-                  <b-img-lazy :src="data.thumb ? data.thumb:require('../assets/nopic.gif')" fluid-grow/>
+                  <b-img-lazy :src="data.thumb ? qiniuImgHost+data.thumb+'?'+shuiyanImgThumb:require('../assets/nopic.gif')" fluid-grow/>
                 </div>
                 <div class="news-list-bottom">
                   <h1>{{data.title}}</h1>
