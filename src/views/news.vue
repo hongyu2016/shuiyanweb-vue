@@ -50,7 +50,6 @@
               </div>
             </a>
           </router-link>
-
         </b-col>
       </b-row>
       <nav class="page-box" v-if="totalPages>=1">
