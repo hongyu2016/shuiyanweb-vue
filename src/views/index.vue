@@ -102,7 +102,7 @@
                 </div>
                 <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
                   <b-card :title="list.title"
-                          :img-src="list.thumb ? list.thumb:require('../assets/nopic.gif')"
+                          :img-src="list.thumb ? qiniuImgHost+list.thumb+'?'+shuiyanImgThumb:require('../assets/nopic.gif')"
                           :img-alt="list.title"
                           img-top
                           class="img-list"
@@ -147,7 +147,7 @@
               <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">
-                    <b-img :src="hostUrl+list.slide_thumb" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="hostUrl+list.slide_img"/>
+                    <b-img :src="qiniuImgHost+list.slide_img+'?'+shuiyanImgThumb2" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="qiniuImgHost+list.slide_img"/>
 
                     <div class="bottom-info">
                       <span>{{list.slide_title}}</span>
@@ -261,7 +261,7 @@
               this.loading_notice = false;
               this.gonggaolist=[];
             }
-            
+
           });
 
         }else{
@@ -292,7 +292,19 @@
             };
             //新闻
             this.newsList=dataList.news;
+            this.$nextTick(function () {
+              sr.reveal('.news-list', {
+                 duration: 600,
+                 delay: 200,
+                 origin: 'bottom',
+                 distance: '200px',
+                 easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+                 mobile: true,
+               });
+            });
+
           }
+
           //公告
           /*if(notice.data.success){
             this.gonggaolist=notice.data.data;
@@ -301,16 +313,18 @@
           //水研风采
           if(slide.data.success){
             this.imgList=slide.data.data.datalist;
+            this.$nextTick(function () {
+              sr.reveal('.index-img-list', {
+                duration: 600,
+                delay: 200,
+                origin: 'bottom',
+                distance: '200px',
+                easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
+                mobile: true,
+              });
+            });
 
           }
-          sr.reveal('.news-list,.index-img-list', {
-            duration: 600,
-            delay: 200,
-            origin: 'bottom',
-            distance: '200px',
-            easing: 'cubic-bezier(0.6, 0.2, 0.1, 1)',
-            mobile: true,
-          });
 
         }));
 
