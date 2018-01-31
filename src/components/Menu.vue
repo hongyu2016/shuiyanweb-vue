@@ -4,8 +4,8 @@
     <b-navbar class="container new-menu-bg" toggleable="md" type="dark" variant="" fixed="top" v-bind:style="nav_bg">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="#">
-        <img src="https://placekitten.com/g/30/30" alt="BV">
-        logo
+        <img src="../assets/logo.png" alt="水研村" class="logo-img">
+        <!--水研村-->
       </b-navbar-brand>
       <b-collapse is-nav v-model="showCollapse" id="nav_collapse" class="new-collapse">
 
@@ -118,6 +118,9 @@
   }
   .deep-bg{
     background-color: rgba(0,0,0,1);
+  }
+  .logo-img{
+    height: 35px;
   }
 
   .new-menu-bg{

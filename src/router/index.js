@@ -30,7 +30,7 @@ export default new Router({
       path:'/newsdetail/id/:id',
       name:'news_detail',
       component:newsDetail,
-      props: (route) => ({ title: route.query.title })
+      props: (route) => ({ title: route.query.title })  //传递标题参数  浏览器  ?title=''  类型
     },
     {
       path:'/contactus',
