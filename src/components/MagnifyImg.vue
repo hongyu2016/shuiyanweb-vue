@@ -54,13 +54,13 @@
     position: relative;
     margin: 0;
     /*max-width: 1024px;*/
-    height: 80%;
-    max-width: 90%;
+
+    max-width: 80%;
   }
   .img img{
-    /*max-width: 100%;*/
+    max-width: 100%;
     display: block;
-    height: 100%;
+    /*max-height: 90%;*/
   }
 
 </style>

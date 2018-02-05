@@ -147,7 +147,8 @@
               <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">
-                    <b-img :src="qiniuImgHost+list.slide_img+'?'+shuiyanImgThumb2" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="qiniuImgHost+list.slide_img"/>
+                    <!--<b-img :src="qiniuImgHost+list.slide_img+'?'+shuiyanImgThumb2" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="qiniuImgHost+list.slide_img+'?'+shuiyanTuku"/>-->
+                    <img v-img:my-group :src="qiniuImgHost+list.slide_img+'?'+shuiyanTuku">
 
                     <div class="bottom-info">
                       <span>{{list.slide_title}}</span>
@@ -182,7 +183,7 @@
 
   import slide from '@/components/Slide' //轮播图
   import scrollreveal from 'scrollreveal'  //滚动动画
-  import bigImg from '@/components/MagnifyImg' //图片放大
+  //import bigImg from '@/components/MagnifyImg' //图片放大 (弃用)
   import loading from '@/components/loading'
   import Swiper from '../../static/swiper/swiper.min.js'
   export default {
@@ -197,7 +198,8 @@
         intro:{},  //水研简介
         newsList:[],
         loading: false,//除公告外的loading
-        loading_notice:false  //公告loading
+        loading_notice:false,  //公告loading
+
       }
     },
     mounted(){
@@ -359,7 +361,7 @@
     components: {
       //'b-menu': menu,
       'b-slide': slide,
-      'big-img':bigImg,
+      //'big-img':bigImg,
       'loading':loading
     }
   }
@@ -483,12 +485,19 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+    height: 300px;
   }
   .index-img-list .index-img-column>img{
     transition: all 0.5s ease-in-out 0.1s;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
   }
   .index-img-list:hover .index-img-column>img{
-    transform: scale(1.2);
+
+    /*transform: scale(1.2);*/
   }
   .index-img-list .bottom-info{
     width: 100%;
@@ -509,5 +518,10 @@
   }
   .index-img-list:hover .bottom-info{
     height: 50px;
+  }
+  @media (max-width: 576px){
+    .index-img-list .index-img-column{
+      height: 120px;
+    }
   }
 </style>

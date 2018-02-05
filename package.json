@@ -18,6 +18,7 @@
     "scrollreveal": "^3.3.6",
     "socket.io": "^2.0.4",
     "sweet-modal-vue": "^2.0.0",
+    "v-img": "^0.2.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
     "vue-baidu-map": "^0.20.0",
