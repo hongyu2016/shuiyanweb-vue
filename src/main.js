@@ -27,16 +27,15 @@ Vue.use(BootstrapVue);
 
 const vueImgConfig = {
   // Use `alt` attribute as gallery slide title
-  altAsTitle: false,
+  altAsTitle: true,
   // Display 'download' button near 'close' that opens source image in new tab
-  sourceButton: false,
+  sourceButton: true,
   // Event listener to open gallery will be applied to <img> element
   openOn: 'click',
   // Show thumbnails for all groups with more than 1 image
-  thumbnails: false,
-}
+  thumbnails: true,
+};
 Vue.use(VueImg, vueImgConfig);
-
 
 const host_url_pro='https://shuiyanweb.herokuapp.com';
 const qiniuImgHost='http://p2zln7xdx.bkt.clouddn.com/';//七牛图片服务器地址前缀 用于轮播图和新闻缩略图，新闻详情图不需要

@@ -148,7 +148,7 @@
                 <a href="javascript:;">
                   <div class="index-img-column">
                     <!--<b-img :src="qiniuImgHost+list.slide_img+'?'+shuiyanImgThumb2" fluid :alt="list.title" @click="clickImg($event)" :data-bigsrc="qiniuImgHost+list.slide_img+'?'+shuiyanTuku"/>-->
-                    <img v-img:my-group :src="qiniuImgHost+list.slide_img+'?'+shuiyanTuku">
+                    <img v-img:myview :src="qiniuImgHost+list.slide_img+'?'+shuiyanTuku" :alt="list.slide_title">
 
                     <div class="bottom-info">
                       <span>{{list.slide_title}}</span>
@@ -175,7 +175,7 @@
       <div class="d-block" v-html="intro.introduce_all"></div>
     </b-modal>
     <!-- 放大图片 -->
-    <big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>
+    <!--<big-img v-if="showImg" @clickit="viewImg" :imgSrc="imgSrc"></big-img>-->
 
   </div>
 </template>
@@ -523,5 +523,12 @@
     .index-img-list .index-img-column{
       height: 120px;
     }
+  }
+  /*图片放大的 thumbs*/
+  .footer-v-img img{
+    transition: all 0.2s ease-out !important;
+  }
+  .footer-v-img img.is-selected{
+    border: solid 1px #ec7610 !important;
   }
 </style>
