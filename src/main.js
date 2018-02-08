@@ -83,7 +83,7 @@ const shuiyanImgThumb2='imageView2/1/w/640/h/480/interlace/1/q/75|watermark/2/te
 const shuiyanTuku='imageView2/2/w/1280/h/640/interlace/1/q/100|watermark/2/text/5rC056CU5p2R/font/5b6u6L2v6ZuF6buR/fontsize/400/fill/I0Y1QTUyRA==/dissolve/87/gravity/SouthEast/dx/10/dy/10|imageslim';//图库缩略处理
 const host_url_dev='http://127.0.0.1:5000';
 const host_url=host_url_pro;
-const socket = io(host_url);
+const socket = io(host_url,{timeout:1000});
 
 Vue.prototype.socket=socket; //全局注册socket 以便在其他组件使用
 

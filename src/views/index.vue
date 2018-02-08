@@ -274,6 +274,13 @@
             }
 
           });
+          this.socket.on('connect_timeout', (timeout) => {
+            //超时
+          });
+          this.socket.on('connect_error', (timeout) => {
+            //出错
+            console.log('链接出错')
+          });
 
         }else{
         	//不支持socket
@@ -281,7 +288,7 @@
       })
     },
 
-    methods: {
+    methods:{
       getList(){
         this.loading = true;
         this.error=false;
