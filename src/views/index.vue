@@ -67,6 +67,8 @@
                 </b-col>
                 <b-col cols="12" md="10" class="text-left shuiyan-intro-right">
                   <loading v-show="loading"></loading><!--loading-->
+                  <!--访问出错时 显示重新加载按钮-->
+                  <error-retry v-show="error" @reGetList="getList"></error-retry>
                   <!--<p>水研村坐落在美丽的广西壮族自治区北海市合浦县山口镇东部，北部与玉林市的大路塘、屋子岭相邻；</p>
                   <p>距离镇中心约六公里，全新水泥路直通村里，交通方便；</p>
                   <p>水研村风景优美，环境舒适，东南部有大排水库，水质清澈；西南部有建于1976年的“天桥”，该桥是当时用于灌溉的水渠的一部分，奇特的地方在于该“天桥”建在两座山之间，高度约有50米，长度大约700米，底下是一条清澈的那交河，至今屹立不倒。</p>-->
@@ -100,6 +102,8 @@
                 <div class="nodata" v-if="newsList.length<=0">
                   暂无新闻纪录
                 </div>
+                <!--访问出错时 显示重新加载按钮-->
+                <error-retry v-show="error" @reGetList="getList"></error-retry>
                 <b-col cols="12" md="4" class="news-list" v-for="list in newsList" :key="list.article_id">
                   <b-card :title="list.title"
                           :img-src="list.thumb ? qiniuImgHost+list.thumb+'?'+shuiyanImgThumb:require('../assets/nopic.gif')"
@@ -144,6 +148,9 @@
               <div class="nodata" v-if="newsList.length<=0">
                 暂无图集纪录
               </div>
+              <!--访问出错时 显示重新加载按钮-->
+              <error-retry v-show="error" @reGetList="getList"></error-retry>
+
               <b-col cols="6" md="3" class="index-img-list no-padding" v-for="list in imgList" :key="list.slide_id">
                 <a href="javascript:;">
                   <div class="index-img-column">
@@ -185,6 +192,7 @@
   import scrollreveal from 'scrollreveal'  //滚动动画
   //import bigImg from '@/components/MagnifyImg' //图片放大 (弃用)
   import loading from '@/components/loading'
+  import errorRetry from '@/components/error-retry'
   import Swiper from '../../static/swiper/swiper.min.js'
   export default {
     name: 'index',
@@ -199,6 +207,7 @@
         newsList:[],
         loading: false,//除公告外的loading
         loading_notice:false,  //公告loading
+        error:false  //请求出错时
 
       }
     },
@@ -223,7 +232,7 @@
           mobile: true,
           viewOffset: { top: 0, right: 0, bottom: 0, left: 0 }
         });
-        this.getlist();
+        this.getList();
 
         if (!!window.WebSocket && window.WebSocket.prototype.send){
           //支持socket
@@ -273,14 +282,15 @@
     },
 
     methods: {
-      getlist(){
+      getList(){
         this.loading = true;
+        this.error=false;
         //首页数据
         this.$http.all([
           this.$http.get(`${this.hostUrl}/api/index/index`),
           this.$http.get(`${this.hostUrl}/api/index/piclist`),
           //this.$http.get(`${this.hostUrl}/api/index/notice`)
-        ])
+        ],{timeout:1000})
         .then(this.$http.spread((index, slide) =>{
           // 上面两个请求都完成后，才执行这个回调方法
           //首页数据
@@ -328,7 +338,21 @@
 
           }
 
-        }));
+        })).catch((error)=>{
+          if (error.response) {
+            // 请求已发出，但服务器响应的状态码不在 2xx 范围内
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+          //显示 手动点击加载按钮
+          this.loading=false;
+          this.error=true
+        });
 
       },
       /*
@@ -349,20 +373,21 @@
       introShowModal(){
         this.$root.$emit('bv::show::modal','intro')
       },
-      clickImg(e) {
+      /*clickImg(e) {
         this.showImg = true;
         // 获取当前图片地址
         this.imgSrc=e.target.getAttribute('data-bigsrc');
       },
       viewImg(){
         this.showImg = false;
-      }
+      }*/
     },
     components: {
       //'b-menu': menu,
       'b-slide': slide,
       //'big-img':bigImg,
-      'loading':loading
+      'loading':loading,
+      'error-retry':errorRetry
     }
   }
 </script>

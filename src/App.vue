@@ -179,4 +179,17 @@
     transform: translate(-50%,-50%);
     color: #969595;
   }
+  .error-box{
+    text-align: center;
+    width: 100%;
+  }
+  .error-box>p{
+    color:red;
+    margin-bottom: 1rem !important;
+  }
+  .error-box .btn{
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+  }
 </style>

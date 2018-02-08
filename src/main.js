@@ -13,6 +13,7 @@ import io from 'socket.io-client'
 import VueImg from 'v-img';
 Vue.prototype.$http=axios;
 Vue.config.productionTip = false;
+//移动端快速点击
 //FastClick.attach(document.body);
 let FastClick=require('fastclick');
 if ('addEventListener' in document) {
@@ -25,6 +26,43 @@ if ('addEventListener' in document) {
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
 
+
+//axios设置 当请求出错时自动重新发起请求
+//在main.js设置全局的请求次数，请求的间隙
+axios.defaults.retry = 4;
+axios.defaults.retryDelay = 2000;
+
+axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
+  var config = err.config;
+  // If config does not exist or the retry option is not set, reject
+  if(!config || !config.retry) return Promise.reject(err);
+
+  // Set the variable for keeping track of the retry count
+  config.__retryCount = config.__retryCount || 0;
+
+  // Check if we've maxed out the total number of retries
+  if(config.__retryCount >= config.retry) {
+    // Reject with the error
+    return Promise.reject(err);
+  }
+
+  // Increase the retry count
+  config.__retryCount += 1;
+
+  // Create new promise to handle exponential backoff
+  var backoff = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve();
+    }, config.retryDelay || 1);
+  });
+
+  // Return the promise in which recalls axios to retry the request
+  return backoff.then(function() {
+    return axios(config);
+  });
+});
+
+//图集浏览插件
 const vueImgConfig = {
   // Use `alt` attribute as gallery slide title
   altAsTitle: true,
@@ -37,6 +75,7 @@ const vueImgConfig = {
 };
 Vue.use(VueImg, vueImgConfig);
 
+//全局变量
 const host_url_pro='https://shuiyanweb.herokuapp.com';
 const qiniuImgHost='http://p2zln7xdx.bkt.clouddn.com/';//七牛图片服务器地址前缀 用于轮播图和新闻缩略图，新闻详情图不需要
 const shuiyanImgThumb='imageView2/1/w/320/h/320/interlace/1/q/75|watermark/2/text/5rC056CU5p2R/font/5qW35L2T/fontsize/500/fill/I0Y4RDdCOA==/dissolve/77/gravity/SouthEast/dx/10/dy/10';//七牛的缩略图处理
