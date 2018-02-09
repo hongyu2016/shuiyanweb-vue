@@ -553,6 +553,11 @@
   }
   @media (max-width: 576px){
     .index-img-list .index-img-column{
+      height: 160px;
+    }
+  }
+  @media (max-width: 320px){
+    .index-img-list .index-img-column{
       height: 120px;
     }
   }
