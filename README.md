@@ -1,8 +1,8 @@
 # shuiyan_vue
 
 > 水研官网 
-[访问地址1](https://hongyu2016.github.io/shuiyanweb-vue "悬停显示")  
-[访问地址1](http://www.iyuge.cn/shuiyancun "悬停显示")  
+[访问地址1](https://hongyu2016.github.io/shuiyanweb-vue "地址1")  
+[访问地址2](http://www.iyuge.cn/shuiyancun "地址2")  
 
 ## Build Setup
 
