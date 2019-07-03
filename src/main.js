@@ -77,7 +77,8 @@ Vue.use(VueImg, vueImgConfig);
 
 //全局变量
 const host_url_pro='http://shuiyan.iyuge.cn'; //https://shuiyanweb.herokuapp.com  http://shuiyan.iyuge.cn
-const qiniuImgHost='http://p2zln7xdx.bkt.clouddn.com/';//七牛图片服务器地址前缀 用于轮播图和新闻缩略图，新闻详情图不需要
+//const qiniuImgHost='http://p2zln7xdx.bkt.clouddn.com/';//七牛图片服务器地址前缀 用于轮播图和新闻缩略图，新闻详情图不需要
+const qiniuImgHost='http://qiniu.iyuge.cn/';//七牛图片服务器地址前缀 用于轮播图和新闻缩略图，新闻详情图不需要
 const shuiyanImgThumb='imageView2/1/w/320/h/320/interlace/1/q/75|watermark/2/text/5rC056CU5p2R/font/5qW35L2T/fontsize/500/fill/I0Y4RDdCOA==/dissolve/77/gravity/SouthEast/dx/10/dy/10';//七牛的缩略图处理
 const shuiyanImgThumb2='imageView2/1/w/640/h/480/interlace/1/q/75|watermark/2/text/5rC056CU5p2R/font/5qW35L2T/fontsize/500/fill/I0Y4RDdCOA==/dissolve/77/gravity/SouthEast/dx/10/dy/10';//七牛的缩略图处理2
 const shuiyanTuku='imageView2/2/w/1280/h/640/interlace/1/q/100|watermark/2/text/5rC056CU5p2R/font/5b6u6L2v6ZuF6buR/fontsize/400/fill/I0Y1QTUyRA==/dissolve/87/gravity/SouthEast/dx/10/dy/10|imageslim';//图库缩略处理
