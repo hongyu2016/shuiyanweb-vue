@@ -37,6 +37,29 @@
 			this.title=this.$route.query.title;
       this.getData();
     },
+    updated() {
+      //在dom更新时，设置图片内容格式
+      let childrenList =this.$refs.desc.children;        
+      for (let i in childrenList) {
+        let child = childrenList[i].children
+        if (child) {
+          for (let i in child) {
+            if (child[i].nodeName == 'IMG') { // 判断如果编辑器的html内如果有图片内容的时候，进行图片适配操作
+              let img = child[i]
+              img.style.maxWidth = '100%' // 自适应操作 ，让图片适应当前手机样式
+              img.style.height = 'auto' // 自适应操作
+              //img.style.float = 'left' //使用式样left让图片和上一张图之间不会有间隔
+            }
+            if(child[i].nodeName == 'IFRAME'){
+              let iframe = child[i]
+              iframe.style.width = '100%' // 自适应操作 ，让图片适应当前手机样式
+              iframe.style.height = 'auto' // 自适应操作
+            }
+          }
+        }
+      }
+
+    },
 		methods: {
       getData(){
         this.loading = true;
@@ -49,7 +72,7 @@
             this.title=res.data.data.title;
             this.newsDetail=res.data.data;
             //获取的内容只能用这种方式加样式
-            this.$nextTick(()=>{
+            /* this.$nextTick(()=>{
               let childrenList =this.$refs.desc.children;        
               for (let i in childrenList) {
                 let child = childrenList[i].children
@@ -70,7 +93,7 @@
                 }
               }
 
-            })
+            }) */
           }
         })
         .catch((error) => {
@@ -110,6 +133,15 @@
   }
   .detail .content{
     padding: 20px 0;
+  }
+   .detail .content::before{
+    content: "";
+    display: table;
+   }
+  .detail .content::after{
+    content: "";
+    display: table;
+    clear: both;
   }
   /*无效*/
   /* .detail .content img{
